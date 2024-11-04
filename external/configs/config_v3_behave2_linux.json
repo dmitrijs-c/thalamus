@@ -1,0 +1,174 @@
+{
+  "touch_channels": [
+    0,
+    1
+  ],
+  "task_clusters": [],
+  "queue": [],
+  "reward_schedule": {
+    "schedules": [
+      [
+        0
+      ]
+    ],
+    "index": 0
+  },
+  "nodes": [
+    {
+      "name": "DAQ",
+      "type": "REMOTE",
+      "Address": "10.20.30.102:50050",
+      "Node": "DAQ",
+      "Probe Frequency": 10.0,
+      "Probe Size": 128,
+      "Running": false
+    },
+    {
+      "name": "Camera 1",
+      "type": "GENICAM",
+      "Running": false,
+      "View": true,
+      "Camera": "VimbaUSBTL:DEV_1AB228001040",
+      "WidthMax": 1280,
+      "HeightMax": 1024,
+      "Width": 1280,
+      "Height": 1024,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "ExposureTime": 99999.995,
+      "AcquisitionFrameRate": 9.990375072847318,
+      "Gain": 0.0,
+      "view_geometry": [
+        88,
+        752,
+        400,
+        400
+      ]
+    },
+    {
+      "name": "Camera 2",
+      "type": "GENICAM",
+      "Running": false,
+      "View": true,
+      "Camera": "FLIR_GenTL:USB\\VID_1E10&SRL_0107A7A2\\&2&4&9",
+      "WidthMax": 1280,
+      "HeightMax": 1024,
+      "Width": 1280,
+      "Height": 1024,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "ExposureTime": 6611.883640289307,
+      "AcquisitionFrameRate": 150.0,
+      "Gain": 0.0,
+      "view_geometry": [
+        500,
+        748,
+        400,
+        400
+      ]
+    },
+    {
+      "name": "Camera 3",
+      "type": "GENICAM",
+      "Running": false,
+      "View": true,
+      "Camera": "FLIR_GenTL:USB\\VID_1E10&SRL_0143BED2\\&2&5&10",
+      "WidthMax": 1280,
+      "HeightMax": 1024,
+      "Width": 1280,
+      "Height": 1024,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "ExposureTime": 16570.210456848145,
+      "AcquisitionFrameRate": 60.24267578125,
+      "Gain": 0.0,
+      "view_geometry": [
+        920,
+        743,
+        400,
+        400
+      ]
+    },
+    {
+      "name": "Runner",
+      "type": "RUNNER",
+      "Running": false,
+      "Targets": "Camera 1,Camera 2,Camera 3,DAQ,Storage"
+    },
+    {
+      "name": "Storage",
+      "type": "STORAGE",
+      "Running": false,
+      "Sources": "Camera 1,Camera 2,Camera 3,DAQ",
+      "Output File": "test.tha",
+      "View": false
+    }
+  ],
+  "touch_config": {
+    "selected_node": "",
+    "x": "",
+    "y": ""
+  },
+  "eye_scaling": {
+    "I": {
+      "x": 1,
+      "y": 1
+    },
+    "II": {
+      "x": 1,
+      "y": 1
+    },
+    "III": {
+      "x": 1,
+      "y": 1
+    },
+    "IV": {
+      "x": 1,
+      "y": 1
+    }
+  },
+  "status": "",
+  "thalamus_view_geometry": [
+    100,
+    100,
+    739,
+    608
+  ],
+  "data_views": [
+    {
+      "view_geometry": [
+        854,
+        72,
+        1036,
+        401
+      ],
+      "rows": 1,
+      "columns": 1,
+      "views": [
+        {
+          "row": 0,
+          "column": 0,
+          "selected_node": "DAQ",
+          "selected_channel": "Dev1/ai7",
+          "view_type": "Time Series",
+          "draw_value": false,
+          "static_range": false,
+          "range_min": 0,
+          "range_max": 10
+        }
+      ]
+    }
+  ],
+  "node_widgets": [
+    {
+      "node": "Runner",
+      "dock_area": "right",
+      "view_geometry": [
+        365,
+        20,
+        374,
+        588
+      ]
+    }
+  ]
+}
