@@ -254,10 +254,16 @@ def main():
             config = next_task_config
             next_task_config = None
           core.wait(.032)
-        pprint(config)
+        print("------------------------------------------------")
+        pprint(thalamus_thread.config['task_clusters'])
+        print("------------------------------------------------")
+        print("------------------------------------------------")
+        trial_counts = [task['goal'] for cluster in thalamus_thread.config['task_clusters'] 
+          for task in cluster['tasks']]
+        print(sum(trial_counts))  # Output will be a list of goal values, e.g., [15, 22, 31]
+        print("------------------------------------------------")
+        print("------------------------------------------------")
 
-        if i==1:
-          catch_trials, catch_opacity, goal = config['catch_trials'], config['catch_opacity'], config['goal']
 
         width, height = config['width'], config['height']
         orientation, opacity = config['orientation'], config['opacity']
@@ -289,10 +295,12 @@ def main():
           # assessing the Euclidean distance to the cross at (0,0)
           oculomatic = oculomatic_tool.value
           # my last point of work!!!
-          eye_pos.xys = np.vstack((eye_pos.xys, np.array([[oculomatic.x, oculomatic.y]])))  # Combine old and new positions
-          eye_pos.draw
-          fixation_cross.draw
-          win.flip()
+          # "
+          # eye_pos.xys = np.vstack((eye_pos.xys, np.array([[oculomatic.x, oculomatic.y]])))  # Combine old and new positions
+          # eye_pos.draw
+          # fixation_cross.draw
+          # win.flip()
+          # "
           if (oculomatic.x**2  + oculomatic.y**2)**.5 < 2:
             print(time.perf_counter() - start, oculomatic, (oculomatic.x**2  + oculomatic.y**2)**.5)
           else:
