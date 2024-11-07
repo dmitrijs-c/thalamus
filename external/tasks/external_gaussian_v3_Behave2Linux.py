@@ -167,19 +167,20 @@ def main():
       )
       lines.append(line)
 
-  intersection_points = [] # Calculate the intersection points for position grid
+  rand_pos = [] # Calculate the intersection points for position grid
   for circle in circles:
       radius = circle.radius
       for angle in np.arange(0, 360, 30):
           radians = np.deg2rad(angle)
           x = radius * np.cos(radians)
           y = radius * np.sin(radians)
-          intersection_points.append((x, y))
-  intersection_points = np.array(intersection_points) # Convert the list to a numpy array
+          rand_pos.append((x, y))
+  rand_pos = np.array(rand_pos) # Convert the list to a numpy array
   # Example: Randomly pool a subset of the coordinates without repeating
-  subset_size = int(intersection_points.size/2) # size/2 = total number of coordinate pairs
-  rand_pos = intersection_points[np.random.choice(intersection_points.shape[0], subset_size, replace=False)]
-  i = 1 # index for position iteration
+  np.random.shuffle(rand_pos)  # This shuffles the array in place
+  # subset_size = int(intersection_points.size/2) # size/2 = total number of coordinate pairs
+  # rand_pos = intersection_points[np.random.choice(intersection_points.shape[0], subset_size, replace=False)]
+  i = 0 # index for position iteration
 
   # # Check for repeated values
   # unique_elements, counts = np.unique(rand_pos, axis=0, return_counts=True)
@@ -254,16 +255,10 @@ def main():
             config = next_task_config
             next_task_config = None
           core.wait(.032)
-        print("------------------------------------------------")
-        pprint(thalamus_thread.config['task_clusters'])
-        print("------------------------------------------------")
-        print("------------------------------------------------")
-        trial_counts = [task['goal'] for cluster in thalamus_thread.config['task_clusters'] 
-          for task in cluster['tasks']]
-        print(sum(trial_counts))  # Output will be a list of goal values, e.g., [15, 22, 31]
-        print("------------------------------------------------")
-        print("------------------------------------------------")
-
+        # print("------------------------------------------------")
+        # pprint(thalamus_thread.config['task_clusters'])
+        # pprint(config)
+        # print("------------------------------------------------")
 
         width, height = config['width'], config['height']
         orientation, opacity = config['orientation'], config['opacity']

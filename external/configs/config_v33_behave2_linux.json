@@ -13,7 +13,7 @@
           "task_type": "gaussian_task",
           "type": "task",
           "goal": 10,
-          "name": "Untitled",
+          "name": "catch",
           "intertrial_timeout": {
             "min": 1,
             "max": 1
@@ -87,7 +87,7 @@
           "task_type": "gaussian_task",
           "type": "task",
           "goal": 90,
-          "name": "Untitled",
+          "name": "regular",
           "intertrial_timeout": {
             "min": 1,
             "max": 1
@@ -335,12 +335,12 @@
       "Node": "DAQ",
       "Probe Frequency": 10.0,
       "Probe Size": 128,
-      "Running": false
+      "Running": true
     },
     {
       "name": "camera1",
       "type": "GENICAM",
-      "Running": false,
+      "Running": true,
       "View": true,
       "Camera": "FLIR_GenTL:USB\\VID_1E10&SRL_0107A7A2\\&2&5&9",
       "WidthMax": 1280,
@@ -349,7 +349,7 @@
       "Height": 1024,
       "OffsetX": 0,
       "OffsetY": 0,
-      "ExposureTime": 24880.34963607788,
+      "ExposureTime": 24888.992309570312,
       "AcquisitionFrameRate": 40.0,
       "Gain": 0.0,
       "view_geometry": [
@@ -362,17 +362,17 @@
     {
       "name": "camera2",
       "type": "GENICAM",
-      "Running": false,
+      "Running": true,
       "View": true,
-      "Camera": "FLIR_GenTL:USB\\VID_1E10&SRL_0143BED2\\&2&4&10",
+      "Camera": "FLIR_GenTL:USB\\VID_1E10&SRL_0107A7A2\\&2&5&9",
       "WidthMax": 1280,
       "HeightMax": 1024,
       "Width": 1280,
       "Height": 1024,
       "OffsetX": 0,
       "OffsetY": 0,
-      "ExposureTime": 16570.210456848145,
-      "AcquisitionFrameRate": 60.24267578125,
+      "ExposureTime": 24888.992309570312,
+      "AcquisitionFrameRate": 40.0,
       "Gain": 0.0,
       "view_geometry": [
         538,
@@ -384,7 +384,7 @@
     {
       "name": "camera3",
       "type": "GENICAM",
-      "Running": false,
+      "Running": true,
       "View": true,
       "Camera": "VimbaUSBTL:DEV_1AB228001040",
       "WidthMax": 1280,
@@ -406,7 +406,7 @@
     {
       "name": "runner",
       "type": "RUNNER",
-      "Running": false,
+      "Running": true,
       "Targets": "DAQ,camera1,camera2,camera3"
     },
     {
@@ -486,9 +486,9 @@
   },
   "status": "",
   "thalamus_view_geometry": [
-    98,
-    68,
-    762,
+    100,
+    100,
+    384,
     768
   ],
   "data_views": [
@@ -521,20 +521,20 @@
       "node": "Node 1",
       "dock_area": "right",
       "view_geometry": [
-        397,
+        190,
         20,
-        365,
-        748
+        194,
+        371
       ]
     },
     {
       "node": "Node 1",
       "dock_area": "right",
       "view_geometry": [
+        190,
         397,
-        354,
-        365,
-        414
+        194,
+        371
       ]
     }
   ],
