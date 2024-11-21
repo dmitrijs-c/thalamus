@@ -17,6 +17,7 @@ import json
 import queue
 import typing
 import random
+import queue
 # import asyncio
 import threading
 # import multiprocessing
@@ -30,7 +31,8 @@ from thalamus import task_controller_pb2_grpc
 from thalamus import thalamus_pb2
 from thalamus import thalamus_pb2_grpc
 
-from psychopy import visual, core, monitors
+from psychopy import visual, core, monitors, sound, prefs
+prefs.hardware['audioLib'] = 'PTB'  # Set PTB as the audio backend
 
 from thalamus.thread import ThalamusThread
 from thalamus.oculomatic_tool import OculomaticTool
@@ -71,7 +73,16 @@ def get_value(config: dict, key: str, default: typing.Any = None) -> typing.Unio
 def main():
   clock = core.Clock() # Create a clock object; > precise than core.wait(2.3) (accurate to ~1ms)
   # region -- Defining the monitor and windows
-  # edit!!
+
+  ## Defining sound variables
+  current_directory = os.getcwd() # Get the current working directory
+  # Define a relative path (e.g., accessing a file in a subdirectory)
+  relative_path = os.path.join(current_directory, 'thalamus\\task_controller', 'failure_clip.wav')
+  failure_sound = sound.Sound(relative_path) # Load the .wav file (replace with your file path)
+  relative_path = os.path.join(current_directory, 'thalamus\\task_controller', 'success_clip.wav')
+  success_sound = sound.Sound(relative_path) # Load the .wav file (replace with your file path)
+
+  ## Defining visual variables
   my_monitor = monitors.Monitor('DellLaptopMonitor') # Create a Monitor object
   my_monitor.setSizePix((3840, 2160))  # # Set the screen resolution
   my_monitor.setWidth(38.189)  # # Set the screen width in centimeters
@@ -223,6 +234,9 @@ def main():
   oculomatic_tool = OculomaticTool(thalamus_thread)
   oculomatic_tool.start()
   lock = threading.Lock() 
+  thalamus_stub = thalamus_thread.stub
+  logger = queue.SimpleQueue()
+  log_call = thalamus_stub.log(iter(logger.get, None))
 
   try:
     while True: # this loop executes only once for regular tasks; haven't counted yet for task clusters
@@ -255,10 +269,16 @@ def main():
             config = next_task_config
             next_task_config = None
           core.wait(.032)
-        # print("------------------------------------------------")
+        print("------------------------------------------------")
         # pprint(thalamus_thread.config['task_clusters'])
-        # pprint(config)
-        # print("------------------------------------------------")
+        pprint(config)
+        print("------------------------------------------------")
+
+        # adding config to the saved data
+        logger.put(thalamus_pb2.Text(
+          text=json.dumps(config),
+          time=time.perf_counter_ns()
+        ))
 
         width, height = config['width'], config['height']
         orientation, opacity = config['orientation'], config['opacity']
@@ -330,14 +350,15 @@ def main():
           core.wait(INTERVAL)
         
         print('4. Decision: cross disappears and gaze moves to target')
+        trial_failed = [] # flag failed trial
         for win in [subject_win]:
           win.flip() # Switch drawing buffer to the screen
-        start_dec = time.perf_counter()
-        while time.perf_counter() - start_dec < decision_timeout:
+        start_dec = time.perf_counter() # counter for total time available for deciding
+        while time.perf_counter() - start_dec < decision_timeout: # while we haven't run out of decision time
           oculomatic = oculomatic_tool.value
           print(time.perf_counter() - start_dec, oculomatic, ((oculomatic.x-rand_pos[i][0])**2  + (oculomatic.y-rand_pos[i][1])**2)**.5)
           if ((oculomatic.x-rand_pos[i][0])**2  + (oculomatic.y-rand_pos[i][1])**2)**.5 < 2:
-            start = time.perf_counter()
+            start = time.perf_counter() # timer for target fixation
             while time.perf_counter() - start < fix2_timeout:
               print('5. Hold the target')
               # assessing the Euclidean distance to the cross at (0,0) 
@@ -349,16 +370,24 @@ def main():
               core.wait(INTERVAL)
               if time.perf_counter() - start_dec > decision_timeout:
                 # generate FAIL auditory que, penalty delay?? and restart the task!!
+                failure_sound.play() # Play the sound
+                core.wait(failure_sound.getDuration())  # Wait for the sound's duration to finish
+                trial_failed = 1 # flag failed trial
                 break
-            # generate SUCCESS auditory que, reward and restart the task!!
+            if trial_failed != 1:
+                # generate SUCCESS auditory que, reward and restart the task!!
+                success_sound.play() # Play the sound
+                core.wait(success_sound.getDuration())  # Wait for the sound's duration to finish
             break
           else:
             core.wait(INTERVAL)
 
         task_queue.put(task_controller_pb2.TaskResult(success=True))
-        print(f"Trial # {i} ended.")
+        print(f"Trial # {i+1} ended.")
 
         i += 1
+        if i > rand_pos.shape[1] - 1:
+            np.random.shuffle(rand_pos) # regenerate the random position array every time we run through each position once
         core.wait(1) # remove later after adding appropriate inter-trial and penalty delays!!
   finally:
     print('finally')
