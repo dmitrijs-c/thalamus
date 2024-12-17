@@ -79,7 +79,11 @@
             "min": 1,
             "max": 2
           },
-          "shape": "rectangle"
+          "shape": "rectangle",
+          "penalty_delay": {
+            "min": 3,
+            "max": 3
+          }
         },
         {
           "task_type": "gaussian_task",
@@ -151,166 +155,16 @@
             "min": 1,
             "max": 2
           },
-          "shape": "rectangle"
+          "shape": "rectangle",
+          "penalty_delay": {
+            "min": 3,
+            "max": 3
+          }
         }
       ]
     }
   ],
-  "queue": [
-    {
-      "type": "task_cluster",
-      "name": "Untitled",
-      "weight": 0,
-      "tasks": [
-        {
-          "task_type": "gaussian_task",
-          "type": "task",
-          "goal": 10,
-          "name": "catch",
-          "intertrial_timeout": {
-            "min": 1,
-            "max": 1
-          },
-          "start_timeout": {
-            "min": 1,
-            "max": 1
-          },
-          "hold_timeout": {
-            "min": 1,
-            "max": 1
-          },
-          "blink_timeout": {
-            "min": 1,
-            "max": 1
-          },
-          "fail_timeout": {
-            "min": 1,
-            "max": 1
-          },
-          "success_timeout": {
-            "min": 1,
-            "max": 1
-          },
-          "target_x": {
-            "min": 1,
-            "max": 1
-          },
-          "target_y": {
-            "min": 1,
-            "max": 1
-          },
-          "target_width": {
-            "min": 1,
-            "max": 1
-          },
-          "target_height": {
-            "min": 1,
-            "max": 1
-          },
-          "target_color": [
-            255,
-            255,
-            255
-          ],
-          "targets": [],
-          "width": 1,
-          "height": 1,
-          "orientation": 0,
-          "opacity": 0.2,
-          "is_height_locked": false,
-          "center_x": 0,
-          "center_y": 0,
-          "fix1_timeout": {
-            "min": 1,
-            "max": 2
-          },
-          "fix2_timeout": {
-            "min": 1,
-            "max": 2
-          },
-          "decision_timeout": {
-            "min": 1,
-            "max": 2
-          },
-          "shape": "rectangle",
-          "queue_index": 0
-        },
-        {
-          "task_type": "gaussian_task",
-          "type": "task",
-          "goal": 86,
-          "name": "reward trials",
-          "intertrial_timeout": {
-            "min": 1,
-            "max": 1
-          },
-          "start_timeout": {
-            "min": 1,
-            "max": 1
-          },
-          "hold_timeout": {
-            "min": 1,
-            "max": 1
-          },
-          "blink_timeout": {
-            "min": 1,
-            "max": 1
-          },
-          "fail_timeout": {
-            "min": 1,
-            "max": 1
-          },
-          "success_timeout": {
-            "min": 1,
-            "max": 1
-          },
-          "target_x": {
-            "min": 1,
-            "max": 1
-          },
-          "target_y": {
-            "min": 1,
-            "max": 1
-          },
-          "target_width": {
-            "min": 1,
-            "max": 1
-          },
-          "target_height": {
-            "min": 1,
-            "max": 1
-          },
-          "target_color": [
-            255,
-            255,
-            255
-          ],
-          "targets": [],
-          "width": 1,
-          "height": 1,
-          "orientation": 0,
-          "opacity": 1,
-          "is_height_locked": false,
-          "center_x": 0,
-          "center_y": 0,
-          "fix1_timeout": {
-            "min": 1,
-            "max": 2
-          },
-          "fix2_timeout": {
-            "min": 1,
-            "max": 2
-          },
-          "decision_timeout": {
-            "min": 1,
-            "max": 2
-          },
-          "shape": "rectangle",
-          "queue_index": 1
-        }
-      ]
-    }
-  ],
+  "queue": [],
   "reward_schedule": {
     "schedules": [
       [
@@ -323,7 +177,7 @@
     {
       "name": "cam1",
       "type": "GENICAM",
-      "Running": true,
+      "Running": false,
       "View": true,
       "Camera": "FLIR_GenTL_v140:USB\\VID_1E10&PID_3300&MI_00\\6&258333E9&0&0000",
       "WidthMax": 1280,
@@ -481,9 +335,9 @@
   ],
   "status": "",
   "thalamus_view_geometry": [
-    55,
-    38,
-    996,
+    100,
+    100,
+    602,
     768
   ],
   "data_views": [
@@ -538,7 +392,7 @@
       "node": "cam3",
       "dock_area": "right",
       "view_geometry": [
-        572,
+        178,
         22,
         424,
         746
@@ -562,5 +416,9 @@
       "x": 1,
       "y": 1
     }
+  },
+  "Orchestration": {
+    "Remote Executor": true,
+    "Processes": []
   }
 }
