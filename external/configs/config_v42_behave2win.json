@@ -1,0 +1,278 @@
+{
+  "touch_channels": [
+    0,
+    1
+  ],
+  "task_clusters": [
+    {
+      "type": "task_cluster",
+      "name": "Untitled",
+      "weight": 0,
+      "tasks": [
+        {
+          "task_type": "gaussian_task",
+          "type": "task",
+          "goal": 90,
+          "name": "photic",
+          "intertrial_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "start_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "hold_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "blink_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "fail_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "success_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "target_x": {
+            "min": 1,
+            "max": 1
+          },
+          "target_y": {
+            "min": 1,
+            "max": 1
+          },
+          "target_width": {
+            "min": 1,
+            "max": 1
+          },
+          "target_height": {
+            "min": 1,
+            "max": 1
+          },
+          "target_color": [
+            255,
+            255,
+            255
+          ],
+          "targets": [],
+          "width": 5.5,
+          "height": 1,
+          "orientation": 0,
+          "opacity": 1,
+          "is_height_locked": false,
+          "center_x": 0,
+          "center_y": 0,
+          "fix1_timeout": {
+            "min": 1,
+            "max": 2
+          },
+          "fix2_timeout": {
+            "min": 1,
+            "max": 2
+          },
+          "decision_timeout": {
+            "min": 1,
+            "max": 2
+          },
+          "penalty_delay": {
+            "min": 3,
+            "max": 3
+          },
+          "shape": "rectangle"
+        },
+        {
+          "task_type": "gaussian_task",
+          "type": "task",
+          "goal": 10,
+          "name": "catch",
+          "intertrial_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "start_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "hold_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "blink_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "fail_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "success_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "target_x": {
+            "min": 1,
+            "max": 1
+          },
+          "target_y": {
+            "min": 1,
+            "max": 1
+          },
+          "target_width": {
+            "min": 1,
+            "max": 1
+          },
+          "target_height": {
+            "min": 1,
+            "max": 1
+          },
+          "target_color": [
+            255,
+            255,
+            255
+          ],
+          "targets": [],
+          "width": 1,
+          "height": 1,
+          "orientation": 0,
+          "opacity": 1,
+          "is_height_locked": false,
+          "center_x": 0,
+          "center_y": 0,
+          "fix1_timeout": {
+            "min": 1,
+            "max": 2
+          },
+          "fix2_timeout": {
+            "min": 1,
+            "max": 2
+          },
+          "decision_timeout": {
+            "min": 1,
+            "max": 2
+          },
+          "penalty_delay": {
+            "min": 3,
+            "max": 3
+          },
+          "shape": "rectangle"
+        }
+      ]
+    }
+  ],
+  "queue": [],
+  "reward_schedule": {
+    "schedules": [
+      [
+        0
+      ]
+    ],
+    "index": 0
+  },
+  "Orchestration": {
+    "Remote Executor": false,
+    "Processes": []
+  },
+  "nodes": [
+    {
+      "name": "eyetrack",
+      "type": "OCULOMATIC",
+      "Threshold": 13,
+      "Min Area": 0,
+      "Max Area": 6,
+      "X Gain": 0.0,
+      "Y Gain": 0.0,
+      "Invert X": false,
+      "Invert Y": false,
+      "Source": "cam_eye",
+      "Computing": true,
+      "View": true,
+      "view_geometry": [
+        1943,
+        38,
+        357,
+        362
+      ]
+    },
+    {
+      "name": "Node 1",
+      "type": "OPHANIM",
+      "Running": false,
+      "Address": ""
+    },
+    {
+      "name": "cam_eye",
+      "type": "GENICAM",
+      "Running": true,
+      "View": true,
+      "Camera": "FLIR_GenTL_v140:USB\\VID_1E10&PID_3300&MI_00\\6&258333E9&0&0000",
+      "WidthMax": 1280,
+      "HeightMax": 1024,
+      "Width": 1280,
+      "Height": 1024,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "ExposureTime": 9565.174579620361,
+      "AcquisitionFrameRate": 20.24,
+      "Gain": 0.0,
+      "view_geometry": [
+        1947,
+        441,
+        294,
+        254
+      ]
+    }
+  ],
+  "eye_scaling": {
+    "I": {
+      "x": 1,
+      "y": 1
+    },
+    "II": {
+      "x": 1,
+      "y": 1
+    },
+    "III": {
+      "x": 1,
+      "y": 1
+    },
+    "IV": {
+      "x": 1,
+      "y": 1
+    }
+  },
+  "status": "",
+  "thalamus_view_geometry": [
+    100,
+    100,
+    604,
+    768
+  ],
+  "data_views": [],
+  "node_widgets": [
+    {
+      "node": "eyetrack",
+      "dock_area": "",
+      "view_geometry": [
+        2155,
+        601,
+        147,
+        341
+      ]
+    },
+    {
+      "node": "cam_eye",
+      "dock_area": "right",
+      "view_geometry": [
+        178,
+        22,
+        426,
+        746
+      ]
+    }
+  ]
+}
