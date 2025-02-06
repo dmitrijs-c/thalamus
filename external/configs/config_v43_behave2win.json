@@ -1,0 +1,628 @@
+{
+  "touch_channels": [
+    0,
+    1
+  ],
+  "task_clusters": [
+    {
+      "type": "task_cluster",
+      "name": "Untitled",
+      "weight": 0,
+      "tasks": [
+        {
+          "task_type": "gaussian_task",
+          "type": "task",
+          "goal": 90,
+          "name": "photic",
+          "intertrial_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "start_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "hold_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "blink_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "fail_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "success_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "target_x": {
+            "min": 1,
+            "max": 1
+          },
+          "target_y": {
+            "min": 1,
+            "max": 1
+          },
+          "target_width": {
+            "min": 1,
+            "max": 1
+          },
+          "target_height": {
+            "min": 1,
+            "max": 1
+          },
+          "target_color": [
+            255,
+            255,
+            255
+          ],
+          "targets": [],
+          "width": 3.0,
+          "height": 6.0,
+          "orientation": 0,
+          "opacity": 1,
+          "is_height_locked": true,
+          "center_x": 0,
+          "center_y": 0,
+          "fix1_timeout": {
+            "min": 1,
+            "max": 2
+          },
+          "fix2_timeout": {
+            "min": 1,
+            "max": 2
+          },
+          "decision_timeout": {
+            "min": 1000.0,
+            "max": 20000.0
+          },
+          "penalty_delay": {
+            "min": 3000.0,
+            "max": 3000.0
+          },
+          "shape": "rectangle",
+          "accptolerance_deg": 2,
+          "brightness_per": 100,
+          "width_targ_deg": {
+            "min": 0.1,
+            "max": 1
+          },
+          "widthtargdeg_step": 0.1,
+          "height_targ_deg": {
+            "min": 0.1,
+            "max": 1
+          },
+          "heighttargdeg_step": 0.1,
+          "orientation_ran": {
+            "min": 0,
+            "max": 150
+          },
+          "orientation_step": 30,
+          "luminence_per": {
+            "min": 10,
+            "max": 100
+          },
+          "luminence_step": 10,
+          "fix1_duration": {
+            "min": 1000.0,
+            "max": 2000.0
+          },
+          "target_present_dur": {
+            "min": 2000.0,
+            "max": 4000.0
+          },
+          "fix2_duration": {
+            "min": 1000.0,
+            "max": 2000.0
+          },
+          "subj_dist_m": 0.57,
+          "monitor_width_pix": 1920.0,
+          "monitor_height_pix": 1080,
+          "monitor_width_m": 0.5283,
+          "cum_blinking_ms": 500
+        },
+        {
+          "task_type": "gaussian_task",
+          "type": "task",
+          "goal": 10,
+          "name": "catch",
+          "intertrial_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "start_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "hold_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "blink_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "fail_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "success_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "target_x": {
+            "min": 1,
+            "max": 1
+          },
+          "target_y": {
+            "min": 1,
+            "max": 1
+          },
+          "target_width": {
+            "min": 1,
+            "max": 1
+          },
+          "target_height": {
+            "min": 1,
+            "max": 1
+          },
+          "target_color": [
+            255,
+            255,
+            255
+          ],
+          "targets": [],
+          "width": 3.0,
+          "height": 6.0,
+          "orientation": 0,
+          "opacity": 1,
+          "is_height_locked": true,
+          "center_x": 0,
+          "center_y": 0,
+          "fix1_timeout": {
+            "min": 1,
+            "max": 2
+          },
+          "fix2_timeout": {
+            "min": 1,
+            "max": 2
+          },
+          "decision_timeout": {
+            "min": 1000.0,
+            "max": 20000.0
+          },
+          "penalty_delay": {
+            "min": 3000.0,
+            "max": 3000.0
+          },
+          "shape": "rectangle",
+          "accptolerance_deg": 2,
+          "brightness_per": 10.0,
+          "width_targ_deg": {
+            "min": 0.1,
+            "max": 1
+          },
+          "widthtargdeg_step": 0.1,
+          "height_targ_deg": {
+            "min": 0.1,
+            "max": 1
+          },
+          "heighttargdeg_step": 0.1,
+          "orientation_ran": {
+            "min": 0,
+            "max": 150
+          },
+          "orientation_step": 30,
+          "luminence_per": {
+            "min": 10,
+            "max": 100
+          },
+          "luminence_step": 10,
+          "fix1_duration": {
+            "min": 1000.0,
+            "max": 2000.0
+          },
+          "target_present_dur": {
+            "min": 2000.0,
+            "max": 4000.0
+          },
+          "fix2_duration": {
+            "min": 1000.0,
+            "max": 2000.0
+          },
+          "subj_dist_m": 0.57,
+          "monitor_width_pix": 1920,
+          "monitor_height_pix": 1080,
+          "monitor_width_m": 0.5283,
+          "cum_blinking_ms": 500
+        }
+      ]
+    }
+  ],
+  "queue": [
+    {
+      "type": "task_cluster",
+      "name": "Untitled",
+      "weight": 0,
+      "tasks": [
+        {
+          "task_type": "gaussian_task",
+          "type": "task",
+          "goal": 90,
+          "name": "photic",
+          "intertrial_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "start_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "hold_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "blink_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "fail_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "success_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "target_x": {
+            "min": 1,
+            "max": 1
+          },
+          "target_y": {
+            "min": 1,
+            "max": 1
+          },
+          "target_width": {
+            "min": 1,
+            "max": 1
+          },
+          "target_height": {
+            "min": 1,
+            "max": 1
+          },
+          "target_color": [
+            255,
+            255,
+            255
+          ],
+          "targets": [],
+          "width": 3.0,
+          "height": 6.0,
+          "orientation": 0,
+          "opacity": 1,
+          "is_height_locked": true,
+          "center_x": 0,
+          "center_y": 0,
+          "fix1_timeout": {
+            "min": 1,
+            "max": 2
+          },
+          "fix2_timeout": {
+            "min": 1,
+            "max": 2
+          },
+          "decision_timeout": {
+            "min": 1000.0,
+            "max": 20000.0
+          },
+          "penalty_delay": {
+            "min": 3000.0,
+            "max": 3000.0
+          },
+          "shape": "rectangle",
+          "accptolerance_deg": 2,
+          "brightness_per": 100,
+          "width_targ_deg": {
+            "min": 0.1,
+            "max": 1
+          },
+          "widthtargdeg_step": 0.1,
+          "height_targ_deg": {
+            "min": 0.1,
+            "max": 1
+          },
+          "heighttargdeg_step": 0.1,
+          "orientation_ran": {
+            "min": 0,
+            "max": 150
+          },
+          "orientation_step": 30,
+          "luminence_per": {
+            "min": 10,
+            "max": 100
+          },
+          "luminence_step": 10,
+          "fix1_duration": {
+            "min": 1000.0,
+            "max": 2000.0
+          },
+          "target_present_dur": {
+            "min": 2000.0,
+            "max": 4000.0
+          },
+          "fix2_duration": {
+            "min": 1000.0,
+            "max": 2000.0
+          },
+          "subj_dist_m": 0.57,
+          "monitor_width_pix": 1920.0,
+          "monitor_height_pix": 1080,
+          "monitor_width_m": 0.5283,
+          "cum_blinking_ms": 500,
+          "queue_index": 0
+        },
+        {
+          "task_type": "gaussian_task",
+          "type": "task",
+          "goal": 10,
+          "name": "catch",
+          "intertrial_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "start_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "hold_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "blink_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "fail_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "success_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "target_x": {
+            "min": 1,
+            "max": 1
+          },
+          "target_y": {
+            "min": 1,
+            "max": 1
+          },
+          "target_width": {
+            "min": 1,
+            "max": 1
+          },
+          "target_height": {
+            "min": 1,
+            "max": 1
+          },
+          "target_color": [
+            255,
+            255,
+            255
+          ],
+          "targets": [],
+          "width": 3.0,
+          "height": 6.0,
+          "orientation": 0,
+          "opacity": 1,
+          "is_height_locked": true,
+          "center_x": 0,
+          "center_y": 0,
+          "fix1_timeout": {
+            "min": 1,
+            "max": 2
+          },
+          "fix2_timeout": {
+            "min": 1,
+            "max": 2
+          },
+          "decision_timeout": {
+            "min": 1000.0,
+            "max": 20000.0
+          },
+          "penalty_delay": {
+            "min": 3000.0,
+            "max": 3000.0
+          },
+          "shape": "rectangle",
+          "accptolerance_deg": 2,
+          "brightness_per": 10.0,
+          "width_targ_deg": {
+            "min": 0.1,
+            "max": 1
+          },
+          "widthtargdeg_step": 0.1,
+          "height_targ_deg": {
+            "min": 0.1,
+            "max": 1
+          },
+          "heighttargdeg_step": 0.1,
+          "orientation_ran": {
+            "min": 0,
+            "max": 150
+          },
+          "orientation_step": 30,
+          "luminence_per": {
+            "min": 10,
+            "max": 100
+          },
+          "luminence_step": 10,
+          "fix1_duration": {
+            "min": 1000.0,
+            "max": 2000.0
+          },
+          "target_present_dur": {
+            "min": 2000.0,
+            "max": 4000.0
+          },
+          "fix2_duration": {
+            "min": 1000.0,
+            "max": 2000.0
+          },
+          "subj_dist_m": 0.57,
+          "monitor_width_pix": 1920,
+          "monitor_height_pix": 1080,
+          "monitor_width_m": 0.5283,
+          "cum_blinking_ms": 500,
+          "queue_index": 1
+        }
+      ]
+    }
+  ],
+  "reward_schedule": {
+    "schedules": [
+      [
+        0
+      ]
+    ],
+    "index": 0
+  },
+  "Orchestration": {
+    "Remote Executor": false,
+    "Processes": []
+  },
+  "nodes": [
+    {
+      "name": "eyetrack",
+      "type": "OCULOMATIC",
+      "Threshold": 13,
+      "Min Area": 0,
+      "Max Area": 6,
+      "X Gain": 0.0,
+      "Y Gain": 0.0,
+      "Invert X": false,
+      "Invert Y": false,
+      "Source": "pupil",
+      "Computing": true,
+      "View": true,
+      "view_geometry": [
+        1943,
+        38,
+        357,
+        362
+      ]
+    },
+    {
+      "name": "cam_eye",
+      "type": "GENICAM",
+      "Running": false,
+      "View": true,
+      "Camera": "FLIR_GenTL_v140:USB\\VID_1E10&PID_3300&MI_00\\6&258333E9&0&0000",
+      "WidthMax": 1280,
+      "HeightMax": 1024,
+      "Width": 1280,
+      "Height": 1024,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "ExposureTime": 9565.174579620361,
+      "AcquisitionFrameRate": 20.24000358581543,
+      "Gain": 0.0,
+      "view_geometry": [
+        1947,
+        441,
+        294,
+        254
+      ]
+    },
+    {
+      "name": "store",
+      "type": "STORAGE",
+      "Running": false,
+      "Sources": "",
+      "Output File": "C:\\Users\\bijanadmin\\Documents\\Dmitrijs\\thalamus_data\\test.tha",
+      "View": false,
+      "Compress Analog": false
+    },
+    {
+      "name": "chpick",
+      "type": "CHANNEL_PICKER",
+      "Sources": {
+        "eyetrack": [
+          {
+            "Name": "X",
+            "Out Channel": 0,
+            "Out Name": "eyetrack: X"
+          },
+          {
+            "Name": "Y",
+            "Out Channel": 1,
+            "Out Name": "eyetrack: Y"
+          },
+          {
+            "Name": "Diameter",
+            "Out Channel": 2,
+            "Out Name": "eyetrack: Diameter"
+          }
+        ]
+      }
+    },
+    {
+      "name": "pupil",
+      "type": "PUPIL",
+      "Running": false,
+      "View": false
+    }
+  ],
+  "eye_scaling": {
+    "I": {
+      "x": 60.0,
+      "y": 60.0
+    },
+    "II": {
+      "x": 60.0,
+      "y": 60.0
+    },
+    "III": {
+      "x": 60.0,
+      "y": 60.0
+    },
+    "IV": {
+      "x": 60.0,
+      "y": 60.0
+    }
+  },
+  "status": "Untitled/catch = 0/1 Untitled/photic = 0/2",
+  "thalamus_view_geometry": [
+    100,
+    100,
+    384,
+    768
+  ],
+  "data_views": [],
+  "node_widgets": [
+    {
+      "node": "eyetrack",
+      "dock_area": "",
+      "view_geometry": [
+        2155,
+        260,
+        147,
+        370
+      ]
+    },
+    {
+      "node": "eyetrack",
+      "dock_area": "right",
+      "view_geometry": [
+        178,
+        22,
+        206,
+        746
+      ]
+    }
+  ]
+}

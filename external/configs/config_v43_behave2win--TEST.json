@@ -76,12 +76,12 @@
             "max": 2
           },
           "decision_timeout": {
-            "min": 1,
-            "max": 2
+            "min": 1000.0,
+            "max": 2000.0
           },
           "penalty_delay": {
-            "min": 3,
-            "max": 3
+            "min": 3000.0,
+            "max": 3000.0
           },
           "shape": "rectangle",
           "accptolerance_deg": 2,
@@ -107,17 +107,22 @@
           },
           "luminence_step": 10,
           "fix1_duration": {
-            "min": 1,
-            "max": 2
+            "min": 1000.0,
+            "max": 2000.0
           },
           "target_present_dur": {
-            "min": 2,
-            "max": 4
+            "min": 2000.0,
+            "max": 4000.0
           },
           "fix2_duration": {
-            "min": 1,
-            "max": 2
-          }
+            "min": 1000.0,
+            "max": 2000.0
+          },
+          "subj_dist_m": 0.57,
+          "monitor_width_pix": 1920.0,
+          "monitor_height_pix": 1080,
+          "monitor_width_m": 0.5283,
+          "cum_blinking_ms": 500
         },
         {
           "task_type": "gaussian_task",
@@ -186,12 +191,12 @@
             "max": 2
           },
           "decision_timeout": {
-            "min": 1,
-            "max": 2
+            "min": 1000.0,
+            "max": 2000.0
           },
           "penalty_delay": {
-            "min": 3,
-            "max": 3
+            "min": 3000.0,
+            "max": 3000.0
           },
           "shape": "rectangle",
           "accptolerance_deg": 2,
@@ -217,17 +222,22 @@
           },
           "luminence_step": 10,
           "fix1_duration": {
-            "min": 1,
-            "max": 2
+            "min": 1000.0,
+            "max": 2000.0
           },
           "target_present_dur": {
-            "min": 2,
-            "max": 4
+            "min": 2000.0,
+            "max": 4000.0
           },
           "fix2_duration": {
-            "min": 1,
-            "max": 2
-          }
+            "min": 1000.0,
+            "max": 2000.0
+          },
+          "subj_dist_m": 0.57,
+          "monitor_width_pix": 1920,
+          "monitor_height_pix": 1080,
+          "monitor_width_m": 0.5283,
+          "cum_blinking_ms": 500
         }
       ]
     }
@@ -294,32 +304,56 @@
       "Running": false,
       "Sources": "",
       "Output File": "C:\\Users\\bijanadmin\\Documents\\Dmitrijs\\thalamus_data\\test.tha",
-      "View": false
+      "View": false,
+      "Compress Analog": false
+    },
+    {
+      "name": "chpick",
+      "type": "CHANNEL_PICKER",
+      "Sources": {
+        "eyetrack": [
+          {
+            "Name": "X",
+            "Out Channel": 0,
+            "Out Name": "eyetrack: X"
+          },
+          {
+            "Name": "Y",
+            "Out Channel": 1,
+            "Out Name": "eyetrack: Y"
+          },
+          {
+            "Name": "Diameter",
+            "Out Channel": 2,
+            "Out Name": "eyetrack: Diameter"
+          }
+        ]
+      }
     }
   ],
   "eye_scaling": {
     "I": {
-      "x": 1,
-      "y": 1
+      "x": 12.0,
+      "y": 6.0
     },
     "II": {
-      "x": 1,
-      "y": 1
+      "x": 5.0,
+      "y": 8.0
     },
     "III": {
-      "x": 1,
-      "y": 1
+      "x": 8.0,
+      "y": 4.0
     },
     "IV": {
-      "x": 1,
-      "y": 1
+      "x": 10.0,
+      "y": 9.0
     }
   },
   "status": "",
   "thalamus_view_geometry": [
     100,
     100,
-    888,
+    384,
     768
   ],
   "data_views": [],
@@ -329,18 +363,18 @@
       "dock_area": "",
       "view_geometry": [
         2155,
-        508,
+        353,
         147,
         370
       ]
     },
     {
-      "node": "store",
+      "node": "chpick",
       "dock_area": "right",
       "view_geometry": [
-        462,
+        178,
         22,
-        426,
+        206,
         746
       ]
     }

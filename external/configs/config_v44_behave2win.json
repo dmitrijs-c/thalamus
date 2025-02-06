@@ -6,7 +6,7 @@
   "task_clusters": [
     {
       "type": "task_cluster",
-      "name": "Untitled",
+      "name": "vcp_training",
       "weight": 0,
       "tasks": [
         {
@@ -60,32 +60,6 @@
             255
           ],
           "targets": [],
-          "width": 3.0,
-          "height": 6.0,
-          "orientation": 0,
-          "opacity": 1,
-          "is_height_locked": true,
-          "center_x": 0,
-          "center_y": 0,
-          "fix1_timeout": {
-            "min": 1,
-            "max": 2
-          },
-          "fix2_timeout": {
-            "min": 1,
-            "max": 2
-          },
-          "decision_timeout": {
-            "min": 1,
-            "max": 2
-          },
-          "penalty_delay": {
-            "min": 3,
-            "max": 3
-          },
-          "shape": "rectangle",
-          "accptolerance_deg": 2,
-          "brightness_per": 100,
           "width_targ_deg": {
             "min": 0.1,
             "max": 1
@@ -96,6 +70,7 @@
             "max": 1
           },
           "heighttargdeg_step": 0.1,
+          "is_height_locked": false,
           "orientation_ran": {
             "min": 0,
             "max": 150
@@ -106,17 +81,36 @@
             "max": 100
           },
           "luminence_step": 10,
+          "accptolerance_deg": 2,
+          "subj_dist_m": 0.57,
+          "monitor_width_m": 0.5283,
+          "monitor_width_pix": 1920,
+          "monitor_height_pix": 1080,
           "fix1_duration": {
-            "min": 1,
-            "max": 2
+            "min": 1000,
+            "max": 2000
           },
           "target_present_dur": {
-            "min": 2,
-            "max": 4
+            "min": 2000,
+            "max": 4000
           },
           "fix2_duration": {
-            "min": 1,
-            "max": 2
+            "min": 1000,
+            "max": 2000
+          },
+          "decision_timeout": {
+            "min": 1000,
+            "max": 20000.0
+          },
+          "penalty_delay": {
+            "min": 3000,
+            "max": 3000
+          },
+          "cum_blinking_ms": 500,
+          "shape": "rectangle",
+          "targethold_duration": {
+            "min": 1000,
+            "max": 2000
           }
         },
         {
@@ -170,32 +164,6 @@
             255
           ],
           "targets": [],
-          "width": 3.0,
-          "height": 6.0,
-          "orientation": 0,
-          "opacity": 1,
-          "is_height_locked": true,
-          "center_x": 0,
-          "center_y": 0,
-          "fix1_timeout": {
-            "min": 1,
-            "max": 2
-          },
-          "fix2_timeout": {
-            "min": 1,
-            "max": 2
-          },
-          "decision_timeout": {
-            "min": 1,
-            "max": 2
-          },
-          "penalty_delay": {
-            "min": 3,
-            "max": 3
-          },
-          "shape": "rectangle",
-          "accptolerance_deg": 2,
-          "brightness_per": 10.0,
           "width_targ_deg": {
             "min": 0.1,
             "max": 1
@@ -206,6 +174,7 @@
             "max": 1
           },
           "heighttargdeg_step": 0.1,
+          "is_height_locked": false,
           "orientation_ran": {
             "min": 0,
             "max": 150
@@ -216,17 +185,36 @@
             "max": 100
           },
           "luminence_step": 10,
+          "accptolerance_deg": 2,
+          "subj_dist_m": 0.57,
+          "monitor_width_m": 0.5283,
+          "monitor_width_pix": 1920,
+          "monitor_height_pix": 1080,
           "fix1_duration": {
-            "min": 1,
-            "max": 2
+            "min": 1000,
+            "max": 2000
           },
           "target_present_dur": {
-            "min": 2,
-            "max": 4
+            "min": 2000,
+            "max": 4000
           },
           "fix2_duration": {
-            "min": 1,
-            "max": 2
+            "min": 1000,
+            "max": 2000
+          },
+          "decision_timeout": {
+            "min": 1000,
+            "max": 20000.0
+          },
+          "penalty_delay": {
+            "min": 3000,
+            "max": 3000
+          },
+          "cum_blinking_ms": 500,
+          "shape": "rectangle",
+          "targethold_duration": {
+            "min": 1000,
+            "max": 2000
           }
         }
       ]
@@ -247,30 +235,54 @@
   },
   "nodes": [
     {
+      "name": "nidaq_photodiode",
+      "type": "NIDAQ",
+      "Running": false,
+      "Sample Rate": 1000.0,
+      "Poll Interval": 16,
+      "Channel": "Dev1/ai2:4",
+      "View": true,
+      "view_geometry": [
+        123,
+        707,
+        676,
+        325
+      ]
+    },
+    {
       "name": "eyetrack",
       "type": "OCULOMATIC",
-      "Threshold": 13,
+      "Threshold": 100,
       "Min Area": 0,
-      "Max Area": 6,
+      "Max Area": 100,
       "X Gain": 0.0,
       "Y Gain": 0.0,
       "Invert X": false,
       "Invert Y": false,
-      "Source": "cam_eye",
+      "Source": "pupil",
       "Computing": true,
-      "View": true,
-      "view_geometry": [
-        1943,
-        38,
-        357,
-        362
-      ]
+      "View": false
     },
     {
-      "name": "cam_eye",
+      "name": "pupil",
+      "type": "PUPIL",
+      "Running": false,
+      "View": false
+    },
+    {
+      "name": "storage",
+      "type": "STORAGE",
+      "Running": false,
+      "Sources": "",
+      "Output File": "C:\\Users\\bijanadmin\\Documents\\Dmitrijs\\thalamus_data\\test.tha",
+      "Compress Analog": false,
+      "View": false
+    },
+    {
+      "name": "cam1_eye",
       "type": "GENICAM",
       "Running": false,
-      "View": true,
+      "View": false,
       "Camera": "FLIR_GenTL_v140:USB\\VID_1E10&PID_3300&MI_00\\6&258333E9&0&0000",
       "WidthMax": 1280,
       "HeightMax": 1024,
@@ -282,67 +294,150 @@
       "AcquisitionFrameRate": 20.24000358581543,
       "Gain": 0.0,
       "view_geometry": [
-        1947,
-        441,
-        294,
-        254
+        562,
+        243,
+        400,
+        400
       ]
     },
     {
-      "name": "store",
-      "type": "STORAGE",
-      "Running": false,
-      "Sources": "",
-      "Output File": "C:\\Users\\bijanadmin\\Documents\\Dmitrijs\\thalamus_data\\test.tha",
-      "View": false
+      "name": "touch screen",
+      "type": "TOUCH_SCREEN",
+      "Source": "fake_screen",
+      "Transform": [
+        [
+          1.4290845133720946,
+          -0.04785432355289432,
+          2427.6912122459944
+        ],
+        [
+          -0.0878917112282387,
+          0.859412378118356,
+          334.0563820798409
+        ],
+        [
+          4.336808689942018e-19,
+          3.903127820947816e-18,
+          1.0
+        ]
+      ],
+      "Monitor": 1
+    },
+    {
+      "name": "fake_screen",
+      "type": "ANALOG",
+      "Widget is Touchpad": true
     }
   ],
   "eye_scaling": {
     "I": {
-      "x": 1,
-      "y": 1
+      "x": 60.0,
+      "y": 60.0
     },
     "II": {
-      "x": 1,
-      "y": 1
+      "x": 60.0,
+      "y": 60.0
     },
     "III": {
-      "x": 1,
-      "y": 1
+      "x": 60.0,
+      "y": 60.0
     },
     "IV": {
-      "x": 1,
-      "y": 1
+      "x": 60.0,
+      "y": 60.0
     }
   },
   "status": "",
   "thalamus_view_geometry": [
     100,
     100,
-    888,
+    610,
     768
   ],
-  "data_views": [],
-  "node_widgets": [
+  "data_views": [
     {
-      "node": "eyetrack",
-      "dock_area": "",
       "view_geometry": [
-        2155,
-        508,
-        147,
-        370
+        2847,
+        673,
+        405,
+        400
+      ],
+      "rows": 2,
+      "columns": 1,
+      "views": [
+        {
+          "row": 0,
+          "column": 0,
+          "selected_node": "touch screen",
+          "selected_channel": "X",
+          "view_type": "Time Series",
+          "draw_value": false,
+          "static_range": false,
+          "range_min": 0,
+          "range_max": 10
+        },
+        {
+          "row": 1,
+          "column": 0,
+          "selected_node": "touch screen",
+          "selected_channel": "Y",
+          "view_type": "Time Series",
+          "draw_value": false,
+          "static_range": false,
+          "range_min": 0,
+          "range_max": 10
+        }
       ]
     },
     {
-      "node": "store",
+      "view_geometry": [
+        1170,
+        332,
+        405,
+        400
+      ],
+      "rows": 1,
+      "columns": 1,
+      "views": [
+        {
+          "row": 0,
+          "column": 0,
+          "selected_node": "touch screen",
+          "selected_channel": "X",
+          "view_type": "Time Series",
+          "draw_value": false,
+          "static_range": false,
+          "range_min": 0,
+          "range_max": 10
+        }
+      ]
+    }
+  ],
+  "node_widgets": [
+    {
+      "node": "fake_screen",
+      "dock_area": "",
+      "view_geometry": [
+        39,
+        504,
+        649,
+        598
+      ]
+    },
+    {
+      "node": "touch screen",
       "dock_area": "right",
       "view_geometry": [
-        462,
+        404,
         22,
-        426,
+        206,
         746
       ]
     }
-  ]
+  ],
+  "touch_config": {
+    "selected_node": "nidaq_photodiode",
+    "x": "",
+    "y": ""
+  }
 }
