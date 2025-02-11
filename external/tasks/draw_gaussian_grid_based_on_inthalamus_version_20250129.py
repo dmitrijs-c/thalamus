@@ -8,7 +8,7 @@ import sys
 import numpy as np
 import random
 from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtGui import QPainter, QRadialGradient, QColor
+from PyQt5.QtGui import QPainter, QRadialGradient, QColor, QFont
 from PyQt5.QtCore import QPointF, Qt
 
 class Size:
@@ -55,6 +55,7 @@ class Converter:
 
 class GaussianDemo(QWidget):
     def __init__(self):
+        global background_color_gauss
         super().__init__()
         self.setWindowTitle("Gaussian Visual Patterns")
         self.setGeometry(100, 100, 1920, 1080)  # Set window size
@@ -64,6 +65,7 @@ class GaussianDemo(QWidget):
         # Set initial background color to black
         self.background_color = QColor(0, 0, 0, 255)
         self.set_background_color(self.background_color.red())
+        background_color_gauss = QColor(self.background_color.red(), self.background_color.red(), self.background_color.red(), 255)
 
         # Configuration variables
         self.num_circles = 7  # Number of concentric circles for positions
@@ -79,7 +81,7 @@ class GaussianDemo(QWidget):
         self.target_width_pix = self.converter.deg_to_pixel_rel(self.target_width_deg)  # Width in pixels
         self.target_height_pix = self.converter.deg_to_pixel_rel(self.target_height_deg)  # Height in pixels
         self.gaussian_gradient = self.create_gaussian_gradient(
-            QPointF(0, 0), self.target_width_pix / 2, deviations=1, brightness=self.luminance_per
+            QPointF(0, 0), self.target_width_pix / 2, background_color_gauss, deviations=1, brightness=self.luminance_per
         )  # Create Gaussian gradient
 
         # State variable for drawing options
@@ -107,14 +109,19 @@ class GaussianDemo(QWidget):
         random.shuffle(positions)  # Shuffle positions to randomize their order
         return positions
 
-    def create_gaussian_gradient(self, center, radius, deviations=1, brightness=255):
+    def drawText(self, painter, event):
+        painter.setPen(QColor(0, 0, 0))
+        painter.setFont(QFont('Arial', 20))
+        painter.drawText(event.rect(), Qt.AlignCenter, "Hello, Qt!")
+
+    def create_gaussian_gradient(self, center, radius, background_color_gauss, deviations=1, brightness=255):
         """Create a Gaussian radial gradient."""
         gradient = QRadialGradient(center, radius)
         resolution = 1000  # Number of gradient levels
         for i in range(resolution):
             level = int(brightness * np.exp(-(deviations * i / resolution) ** 2 / 2))
             gradient.setColorAt(i / resolution, QColor(level, level, level))
-        gradient.setColorAt(1, Qt.black)
+        gradient.setColorAt(1, background_color_gauss) # Qt.black)
         return gradient
 
     def calculate_photodiode_intensities(self, background_intensity):
@@ -138,6 +145,10 @@ class GaussianDemo(QWidget):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
         painter.setPen(QColor(255, 255, 255))  # Set pen color to white
+        photodiode_square = QColor(0, 0, 0, 255)  # Grayscale with alpha 128
+        painter.fillRect(int(self.width() - 150), int(self.height() - 150), 150, 150, photodiode_square) # background small square bottom-right
+        painter.fillRect(0, 0, 150, 150, photodiode_square) # background small square top-left
+        self.drawText(painter, event)
 
         # Dynamically calculate the center of the window
         center_x = int(self.width() / 2)
@@ -179,9 +190,19 @@ class GaussianDemo(QWidget):
         if self.drawing_option == 1:
             photodiode_square = QColor(255, 0, 0, 255)  # Grayscale with alpha 128
             painter.fillRect(int(self.width() - 100), int(self.height() - 100), 100, 100, photodiode_square)
+            painter.fillRect(0, 0, 100, 100, photodiode_square)
         elif self.drawing_option == 2:
             photodiode_square = QColor(intensity2, intensity2, intensity2, 255)  # Grayscale with alpha 255
             painter.fillRect(int(self.width() - 100), int(self.height() - 100), 100, 100, photodiode_square)
+            painter.fillRect(0, 0, 100, 100, photodiode_square)
+        elif self.drawing_option == 3:
+            photodiode_square = QColor(0, 0, 0, 255)  # Grayscale with alpha 255
+            painter.fillRect(int(self.width() - 100), int(self.height() - 100), 100, 100, photodiode_square)
+            painter.fillRect(0, 0, 100, 100, photodiode_square)
+        elif self.drawing_option == 4:
+            photodiode_square = QColor(255, 255, 255, 255)  # Grayscale with alpha 255
+            painter.fillRect(int(self.width() - 100), int(self.height() - 100), 100, 100, photodiode_square)
+            painter.fillRect(0, 0, 100, 100, photodiode_square)
 
         painter.end()
 
@@ -221,6 +242,12 @@ class GaussianDemo(QWidget):
         elif event.key() == Qt.Key_3:
             self.drawing_option = 2  # Draw a white square with alpha 255
             self.update()  # Trigger a repaint
+        elif event.key() == Qt.Key_4:
+            self.drawing_option = 3  # Draw a white square with alpha 255
+            self.update()  # Trigger a repaint
+        elif event.key() == Qt.Key_5:
+            self.drawing_option = 4  # Draw a white square with alpha 255
+            self.update()  # Trigger a repaint
         elif event.key() == Qt.Key_B:
             # Toggle background color between black, white, and grey using grayscale intensity
             if self.background_color == QColor(0, 0, 0, 255):
@@ -229,6 +256,10 @@ class GaussianDemo(QWidget):
                 self.background_color = QColor(128, 128, 128, 255)  # Grey
             else:
                 self.background_color = QColor(0, 0, 0, 255)  # Black
+            background_color_gauss = QColor(self.background_color.red(), self.background_color.red(), self.background_color.red())
+            self.gaussian_gradient = self.create_gaussian_gradient(
+                QPointF(0, 0), self.target_width_pix / 2, background_color_gauss, deviations=1, brightness=self.luminance_per
+                )  # Create Gaussian gradient
             self.set_background_color(self.background_color.red())  # Use the red component as the intensity
 
 
