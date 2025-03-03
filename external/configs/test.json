@@ -77,52 +77,46 @@
           },
           "orientation_step": 30,
           "luminence_per": {
-            "min": 30.0,
+            "min": 10,
             "max": 100
           },
           "luminence_step": 10,
-          "accptolerance_deg": 2.0,
+          "accptolerance_deg": 2,
           "subj_dist_m": 0.57,
           "monitor_width_m": 0.5283,
           "monitor_width_pix": 1920,
           "monitor_height_pix": 1080,
           "fix1_duration": {
-            "min": 1000.0,
-            "max": 2000.0
+            "min": 10.0,
+            "max": 20.0
           },
           "target_present_dur": {
             "min": 2000.0,
-            "max": 4000.0
+            "max": 2000.0
           },
           "fix2_duration": {
-            "min": 1000.0,
-            "max": 2000.0
+            "min": 10.0,
+            "max": 20.0
           },
           "decision_timeout": {
-            "min": 10000.0,
-            "max": 20000.0
+            "min": 10.0,
+            "max": 20.0
           },
           "penalty_delay": {
-            "min": 1000.0,
-            "max": 2000.0
+            "min": 30.0,
+            "max": 30.0
           },
           "cum_blinking_ms": 500,
           "shape": "rectangle",
           "targethold_duration": {
-            "min": 2000.0,
-            "max": 4000.0
+            "min": 10.0,
+            "max": 20.0
           },
           "background_color": [
             128,
             128,
             128
-          ],
-          "paint_all_targets": false,
-          "luminance_per": {
-            "min": 10,
-            "max": 100
-          },
-          "luminance_step": 10
+          ]
         },
         {
           "task_type": "gaussian_task",
@@ -192,52 +186,46 @@
           },
           "orientation_step": 30,
           "luminence_per": {
-            "min": 0.0,
-            "max": 25.0
+            "min": 10,
+            "max": 100
           },
-          "luminence_step": 5.0,
+          "luminence_step": 10,
           "accptolerance_deg": 2,
           "subj_dist_m": 0.57,
           "monitor_width_m": 0.5283,
           "monitor_width_pix": 1920,
           "monitor_height_pix": 1080,
           "fix1_duration": {
-            "min": 1000.0,
-            "max": 2000.0
+            "min": 10.0,
+            "max": 20.0
           },
           "target_present_dur": {
             "min": 2000.0,
-            "max": 4000.0
+            "max": 2000.0
           },
           "fix2_duration": {
-            "min": 1000.0,
-            "max": 2000.0
+            "min": 10.0,
+            "max": 20.0
           },
           "decision_timeout": {
-            "min": 10000.0,
-            "max": 20000.0
+            "min": 10.0,
+            "max": 20.0
           },
           "penalty_delay": {
-            "min": 1000.0,
-            "max": 2000.0
+            "min": 30.0,
+            "max": 30.0
           },
           "cum_blinking_ms": 500,
           "shape": "rectangle",
           "targethold_duration": {
-            "min": 2000.0,
-            "max": 4000.0
+            "min": 10.0,
+            "max": 20.0
           },
           "background_color": [
             128,
             128,
             128
-          ],
-          "paint_all_targets": false,
-          "luminance_per": {
-            "min": 10,
-            "max": 100
-          },
-          "luminance_step": 10
+          ]
         }
       ]
     }
@@ -281,10 +269,9 @@
       "Y Gain": 0.0,
       "Invert X": false,
       "Invert Y": false,
-      "Source": "cam1_eye",
-      "Computing": false,
-      "View": false,
-      "Running": false
+      "Source": "pupil",
+      "Computing": true,
+      "View": false
     },
     {
       "name": "pupil",
@@ -296,7 +283,7 @@
       "name": "storage",
       "type": "STORAGE",
       "Running": false,
-      "Sources": "eyetrack,nidaq_in,performance,touch screen",
+      "Sources": "nidaq_in,touch screen",
       "Output File": "C:\\Users\\bijanadmin\\Documents\\Dmitrijs\\thalamus_data\\test.tha",
       "Compress Analog": false,
       "View": false
@@ -329,17 +316,17 @@
       "Source": "nidaq_in",
       "Transform": [
         [
-          71.52926349170085,
-          1.448925501183325,
-          2768.46143815026
+          74.32533330657395,
+          -0.041611395903231596,
+          2741.9627711714234
         ],
         [
-          -0.24694005543870887,
-          -69.8231263954064,
-          556.83048543163
+          -1.79905032786453,
+          -68.5913274367215,
+          563.3053969917004
         ],
         [
-          3.903127820947816e-18,
+          -1.734723475976807e-18,
           2.7755575615628914e-17,
           1.0
         ]
@@ -350,38 +337,27 @@
       "name": "fake_screen",
       "type": "ANALOG",
       "Widget is Touchpad": true
-    },
-    {
-      "name": "performance",
-      "type": "ANALOG",
-      "Widget is Touchpad": false
-    },
-    {
-      "name": "runner",
-      "type": "RUNNER",
-      "Running": false,
-      "Targets": "cam1_eye,eyetrack,nidaq_in,storage"
     }
   ],
   "eye_scaling": {
     "I": {
-      "x": 1.0,
-      "y": 1.0
+      "x": 60.0,
+      "y": 60.0
     },
     "II": {
-      "x": 1.0,
-      "y": 1.0
+      "x": 60.0,
+      "y": 60.0
     },
     "III": {
-      "x": 1.0,
-      "y": 1.0
+      "x": 60.0,
+      "y": 60.0
     },
     "IV": {
-      "x": 1.0,
-      "y": 1.0
+      "x": 60.0,
+      "y": 60.0
     }
   },
-  "status": "vcp_training/catch = 0/1 vcp_training/photic = 0/4",
+  "status": "",
   "thalamus_view_geometry": [
     100,
     100,
@@ -391,10 +367,10 @@
   "data_views": [
     {
       "view_geometry": [
-        911,
-        1,
-        1004,
-        384
+        590,
+        122,
+        1122,
+        844
       ],
       "rows": 3,
       "columns": 1,
@@ -402,8 +378,8 @@
         {
           "row": 0,
           "column": 0,
-          "selected_node": "performance",
-          "selected_channel": "Trial Number",
+          "selected_node": "nidaq_in",
+          "selected_channel": "Dev1/ai4",
           "view_type": "Time Series",
           "draw_value": true,
           "static_range": false,
@@ -413,10 +389,10 @@
         {
           "row": 1,
           "column": 0,
-          "selected_node": "performance",
-          "selected_channel": "Photic trial success rate (%)",
+          "selected_node": "touch screen",
+          "selected_channel": "",
           "view_type": "Time Series",
-          "draw_value": true,
+          "draw_value": false,
           "static_range": false,
           "range_min": 0,
           "range_max": 10
@@ -424,44 +400,10 @@
         {
           "row": 2,
           "column": 0,
-          "selected_node": "performance",
-          "selected_channel": "Catch trial success rate (%)",
+          "selected_node": "nidaq_in",
+          "selected_channel": "Dev1/ai3",
           "view_type": "Time Series",
-          "draw_value": true,
-          "static_range": false,
-          "range_min": 0,
-          "range_max": 10
-        }
-      ]
-    },
-    {
-      "view_geometry": [
-        916,
-        23,
-        1010,
-        385
-      ],
-      "rows": 2,
-      "columns": 1,
-      "views": [
-        {
-          "row": 0,
-          "column": 0,
-          "selected_node": "touch screen",
-          "selected_channel": "X",
-          "view_type": "Time Series",
-          "draw_value": true,
-          "static_range": false,
-          "range_min": 0,
-          "range_max": 10
-        },
-        {
-          "row": 1,
-          "column": 0,
-          "selected_node": "touch screen",
-          "selected_channel": "Y",
-          "view_type": "Time Series",
-          "draw_value": true,
+          "draw_value": false,
           "static_range": false,
           "range_min": 0,
           "range_max": 10
@@ -471,7 +413,7 @@
   ],
   "node_widgets": [
     {
-      "node": "runner",
+      "node": "storage",
       "dock_area": "right",
       "view_geometry": [
         178,

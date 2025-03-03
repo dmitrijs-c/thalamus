@@ -3,3 +3,5 @@ Select x64 Native Tools Command Prompt for VS 2022
 python -m thalamus.task_controller --config C:\Users\bijanadmin\Documents\Dmitrijs\thalamus\external\configs\config_v44_behave2win.json
 
 python -m thalamus.hydrate C:\Users\bijanadmin\Documents\Dmitrijs\thalamus_data\test.tha.20250130194354.1
+
+python -m build -n -w

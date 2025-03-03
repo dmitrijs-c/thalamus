@@ -1,8 +1,10 @@
 """
-Drawing QT version of the Gaussian patterns on the screen based on the grid of the concentric circles.
-key F = full screen
-keys 1,2,3 = draw white square with alpha 128, 255, or nothing
-key B = toggle background color between black and white
+Draws 5 single-brightness value circles throughout the screen. The greyscale color of these circles can be
+changed by pressing the keys 1-9 for 10%-90% luminance, and 0 for 100% luminance. The background color can be
+changed by pressing the key 'B' to toggle between black, white, and grey. The window can be toggled between
+full-screen and windowed mode by pressing the key 'F'. The window can be closed by pressing the 'Esc' key.
+The greyscale color of the circles mimics the change in luminance.
+Pressing the 'O' key toggles the drawing of lines through the center of the circles to help with size measurements.
 """
 import sys
 import numpy as np
@@ -73,19 +75,21 @@ class GaussianDemo(QWidget):
         self.circle_radii += self.screen_size.width / self.num_circles # a sum of screen width and height based steps
         self.circle_radii = self.circle_radii[self.circle_radii <= self.screen_size.height]
         self.circle_radii /= 2
-        self.positions = self.generate_positions_on_circles()  # Generate target positions
+        self.positions = self.generate_positions()  # Generate target positions
         self.luminance_per = 100  # Luminance in percentage
         self.orientation = 0  # Orientation of Gaussian in degrees
-        self.target_width_deg = 1  # Target width in degrees
-        self.target_height_deg = 1  # Target height in degrees
+        self.target_width_deg = 6  # Target width in degrees
+        self.target_height_deg = 6  # Target height in degrees
         self.target_width_pix = self.converter.deg_to_pixel_rel(self.target_width_deg)  # Width in pixels
         self.target_height_pix = self.converter.deg_to_pixel_rel(self.target_height_deg)  # Height in pixels
         self.gaussian_gradient = self.create_gaussian_gradient(
-            QPointF(0, 0), self.target_width_pix / 2, background_color_gauss, deviations=1, brightness=self.luminance_per/100*255
+            QPointF(0, 0), self.target_width_pix / 2, background_color_gauss, deviations=1, brightness=self.luminance_per*255/100
         )  # Create Gaussian gradient
 
         # State variable for drawing options
         self.drawing_option = 0  # 0: No square, 1: White square with alpha 128, 2: White square with alpha 255
+        self.text_message = f"Luminance: {self.luminance_per}%"  # Text message to be displayed
+        self.draw_lines = False  # State variable to toggle drawing lines
 
     def set_background_color(self, intensity):
         """Set the background color of the window using grayscale intensity."""
@@ -96,23 +100,28 @@ class GaussianDemo(QWidget):
         self.setAutoFillBackground(True)
         self.update()  # Trigger a repaint
 
-    def generate_positions_on_circles(self):
-        """Generate target positions on concentric circles."""
+    def generate_positions(self):
+        """Generate 5 specific positions on the screen."""
+        center_x = self.width() / 2
+        center_y = self.height() / 2
+
+        # Calculate the positions
         positions = [
-            QPointF(
-                self.width() / 2 + radius * np.cos(angle),
-                self.height() / 2 + radius * np.sin(angle),
-            )
-            for radius in self.circle_radii[::2]
-            for angle in np.linspace(0, 2 * np.pi, 12, endpoint=False)
+            QPointF(center_x, center_y),  # Center of the screen
+            QPointF(center_x / 2, center_y / 2),  # 1st quarter of the diagonal
+            QPointF(center_x + center_x / 2, center_y + center_y / 2),  # Last quarter of the diagonal
+            QPointF(center_x / 2, center_y + center_y / 2),  # 1st quarter of the other diagonal
+            QPointF(center_x + center_x / 2, center_y / 2)  # Last quarter of the other diagonal
         ]
-        random.shuffle(positions)  # Shuffle positions to randomize their order
         return positions
 
-    def drawText(self, painter, event):
+    def drawText(self, painter, text):
         painter.setPen(QColor(0, 0, 0))
         painter.setFont(QFont('Arial', 20))
-        painter.drawText(event.rect(), Qt.AlignCenter, "Hello, Qt!")
+        rect = painter.viewport()
+        rect.setTop(0)
+        rect.setHeight(50)  # Adjust the height as needed
+        painter.drawText(rect, Qt.AlignHCenter | Qt.AlignTop, text)
 
     def create_gaussian_gradient(self, center, radius, background_color_gauss, deviations=1, brightness=255):
         """Create a Gaussian radial gradient."""
@@ -120,10 +129,11 @@ class GaussianDemo(QWidget):
         resolution = 1000  # Number of gradient levels
         for i in range(resolution):
             # level = int(brightness * np.exp(-(deviations * i / resolution) ** 2 / 2)) # original
-            level = int(background_color_gauss.red() + (brightness - background_color_gauss.red())*np.exp(-(deviations*i/resolution)**2/(2))) # version that makes Gaussian colors bound by background
+            # level = int(background_color_gauss.red() + (brightness - background_color_gauss.red())*np.exp(-(deviations*i/resolution)**2/(2))) # version that makes Gaussian colors bound by background
+            level = int(brightness) # just a constant peak intensity throughout the gradient
             gradient.setColorAt(i / resolution, QColor(level, level, level))
         # gradient.setColorAt(1, background_color_gauss) # Qt.black) # original
-        gradient.setColorAt(1, QColor(background_color_gauss.red(), background_color_gauss.green(), background_color_gauss.blue(), 255)) #Qt.GlobalColor.black
+        gradient.setColorAt(1, QColor(background_color_gauss.red(), background_color_gauss.green(), background_color_gauss.blue(), 0)) #Qt.GlobalColor.black
         return gradient
 
     def calculate_photodiode_intensities(self, background_intensity):
@@ -150,39 +160,46 @@ class GaussianDemo(QWidget):
         photodiode_square = QColor(0, 0, 0, 255)  # Grayscale with alpha 128
         painter.fillRect(int(self.width() - 150), int(self.height() - 150), 150, 150, photodiode_square) # background small square bottom-right
         painter.fillRect(0, 0, 150, 150, photodiode_square) # background small square top-left
-        self.drawText(painter, event)
+        
+        # Draw text at the top-middle
+        self.drawText(painter, self.text_message)        
 
         # Dynamically calculate the center of the window
         center_x = int(self.width() / 2)
         center_y = int(self.height() / 2)
 
-        # Draw the concentric circles
-        for radius in self.circle_radii:
-            painter.drawEllipse(QPointF(center_x, center_y), radius, radius)
+        # # Draw the concentric circles
+        # for radius in self.circle_radii:
+        #     painter.drawEllipse(QPointF(center_x, center_y), radius, radius)
 
-        # Draw the center cross (XY axes)
-        painter.drawLine(center_x, 0, center_x, self.height())  # Vertical line
-        painter.drawLine(0, center_y, self.width(), center_y)  # Horizontal line
+        # # Draw the center cross (XY axes)
+        # painter.drawLine(center_x, 0, center_x, self.height())  # Vertical line
+        # painter.drawLine(0, center_y, self.width(), center_y)  # Horizontal line
 
-        # Draw angled lines for 30° increments
-        for angle in np.arange(0, 360, 30):
-            x = int(center_x + self.circle_radii[-1] * np.cos(np.radians(angle)))
-            y = int(center_y + self.circle_radii[-1] * np.sin(np.radians(angle)))
-            painter.drawLine(center_x, center_y, x, y)
+        # # Draw angled lines for 30° increments
+        # for angle in np.arange(0, 360, 30):
+        #     x = int(center_x + self.circle_radii[-1] * np.cos(np.radians(angle)))
+        #     y = int(center_y + self.circle_radii[-1] * np.sin(np.radians(angle)))
+        #     painter.drawLine(center_x, center_y, x, y)
 
-        # Update positions of Gaussian patterns dynamically
+        # Update positions of Gaussian patterns dynamically to account for switching between screens
+        center_x = self.width() / 2
+        center_y = self.height() / 2
         dynamic_positions = [
-            QPointF(
-                center_x + radius * np.cos(angle),
-                center_y + radius * np.sin(angle),
-            )
-            for radius in self.circle_radii
-            for angle in np.linspace(0, 2 * np.pi, 12, endpoint=False)
+            QPointF(center_x, center_y),  # Center of the screen
+            QPointF(center_x / 2, center_y / 2),  # 1st quarter of the diagonal
+            QPointF(center_x + center_x / 2, center_y + center_y / 2),  # Last quarter of the diagonal
+            QPointF(center_x / 2, center_y + center_y / 2),  # 1st quarter of the other diagonal
+            QPointF(center_x + center_x / 2, center_y / 2)  # Last quarter of the other diagonal
+    
         ]
 
         # Draw Gaussian patterns
         for position in dynamic_positions:  # "for position in self.positions[:10]" Render the first N positions
             self.draw_gaussian(painter, position)
+            if self.draw_lines:
+                self.draw_cross_lines(painter, position, self.target_width_pix)
+
 
         # Calculate photodiode intensities based on the current background intensity
         background_intensity = self.background_color.red()
@@ -225,6 +242,17 @@ class GaussianDemo(QWidget):
             )
         painter.restore()
     
+    def draw_cross_lines(self, painter, position, diameter):
+        """Draw horizontal and vertical lines at the center of the Gaussian pattern."""
+        painter.save()
+        painter.setPen(QColor(0, 0, 0))  # Set pen color to black
+        half_diameter = int(diameter / 2)
+        # Draw horizontal line
+        painter.drawLine(int(position.x() - half_diameter), int(position.y()), int(position.x() + half_diameter), int(position.y()))
+        # Draw vertical line
+        painter.drawLine(int(position.x()), int(position.y() - half_diameter), int(position.x()), int(position.y() + half_diameter))
+        painter.restore()
+
     def keyPressEvent(self, event):
         """Handle key press events to toggle full-screen mode and drawing options."""
         if event.key() == Qt.Key_Escape:
@@ -235,21 +263,6 @@ class GaussianDemo(QWidget):
                 self.showNormal()  # Exit full-screen mode
             else:
                 self.showFullScreen()  # Enter full-screen mode
-        elif event.key() == Qt.Key_1:
-            self.drawing_option = 0  # Do not draw anything in the bottom right corner
-            self.update()  # Trigger a repaint
-        elif event.key() == Qt.Key_2:
-            self.drawing_option = 1  # Draw a white square with alpha 128
-            self.update()  # Trigger a repaint
-        elif event.key() == Qt.Key_3:
-            self.drawing_option = 2  # Draw a white square with alpha 255
-            self.update()  # Trigger a repaint
-        elif event.key() == Qt.Key_4:
-            self.drawing_option = 3  # Draw a white square with alpha 255
-            self.update()  # Trigger a repaint
-        elif event.key() == Qt.Key_5:
-            self.drawing_option = 4  # Draw a white square with alpha 255
-            self.update()  # Trigger a repaint
         elif event.key() == Qt.Key_B:
             # Toggle background color between black, white, and grey using grayscale intensity
             if self.background_color == QColor(0, 0, 0, 255):
@@ -263,7 +276,19 @@ class GaussianDemo(QWidget):
                 QPointF(0, 0), self.target_width_pix / 2, background_color_gauss, deviations=1, brightness=self.luminance_per/100*255
                 )  # Create Gaussian gradient
             self.set_background_color(self.background_color.red())  # Use the red component as the intensity
-
+        elif Qt.Key_0 <= event.key() <= Qt.Key_9:
+            # Set luminance percentage based on key press (1-9 for 10%-90%, 0 for 100%)
+            self.luminance_per = (event.key() - Qt.Key_0) * 10 if event.key() != Qt.Key_0 else 100
+            self.text_message = f"Luminance: {self.luminance_per}%"  # Update text message
+            background_color_gauss = QColor(self.background_color.red(), self.background_color.red(), self.background_color.red())
+            self.gaussian_gradient = self.create_gaussian_gradient(
+                QPointF(0, 0), self.target_width_pix / 2, background_color_gauss, deviations=1, brightness=self.luminance_per*255/100
+            )
+            self.update()  # Trigger a repaint
+        elif event.key() == Qt.Key_O:
+            # Toggle drawing lines
+            self.draw_lines = not self.draw_lines
+            self.update()  # Trigger a repaint
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
