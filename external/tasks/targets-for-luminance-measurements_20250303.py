@@ -7,6 +7,8 @@ The greyscale color of the circles mimics the change in luminance.
 Pressing the 'O' key toggles the drawing of lines through the center of the circles to help with size measurements.
 """
 import sys
+import typing
+import numbers
 import numpy as np
 import random
 from PyQt5.QtWidgets import QApplication, QWidget
@@ -34,6 +36,7 @@ class Converter:
     self.deg_per_pixel = 180/np.pi*self.rad_per_pixel
     # Calculate meters per pixel
     self.m_per_pixel = screen_width_m/screen_pixels.width
+    print(f"m_per_pixel: {self.m_per_pixel}")
 
   def deg_to_pixel_abs(self, *args):
     """Convert degrees to absolute pixel coordinates."""
@@ -54,6 +57,17 @@ class Converter:
     else:
       x, y = args[0], args[1]
     return x/self.deg_per_pixel, y/self.deg_per_pixel
+  
+  def relpix_to_absdeg(self, *args) -> typing.Tuple[int, int]:
+    # Convert relative pixels to absolute degrees (absolute means relative to the corner of the screen rather than the center)
+    if len(args) == 1: # Handle single argument case
+      if isinstance(args[0], numbers.Number):
+        return (args[0])*self.deg_per_pixel
+      else:
+        x, y = args[0][0], args[0][1]
+    else:
+      x, y = args[0], args[1]
+    return x*self.deg_per_pixel, y*self.deg_per_pixel
 
 class GaussianDemo(QWidget):
     def __init__(self):
@@ -88,8 +102,21 @@ class GaussianDemo(QWidget):
 
         # State variable for drawing options
         self.drawing_option = 0  # 0: No square, 1: White square with alpha 128, 2: White square with alpha 255
-        self.text_message = f"Luminance: {self.luminance_per}%"  # Text message to be displayed
         self.draw_lines = False  # State variable to toggle drawing lines
+        self.draw_gaussians = True  # State variable to toggle drawing Gaussian patterns
+        self.draw_shape = 'circle'  # State variable to toggle between circle and square
+
+        # Configuration for scaling the Gaussian gradient
+        self.scale_step_deg = 0.1  # Step size for scaling
+        self.min_scale_deg = 0.1  # Minimum diameter in degrees
+        self.max_scale_deg = 2.0  # Maximum diameter in degrees
+        self.scale = self.target_width_pix  # Initial scale
+
+        self.text_message = f"Luminance = {self.luminance_per}%\nDiameter = {round(self.target_width_pix*self.converter.deg_per_pixel,2)} deg" # Initial text message
+
+        # Ensure the widget accepts focus and key events
+        self.setFocusPolicy(Qt.StrongFocus)
+        self.setFocus()
 
     def set_background_color(self, intensity):
         """Set the background color of the window using grayscale intensity."""
@@ -115,12 +142,16 @@ class GaussianDemo(QWidget):
         ]
         return positions
 
-    def drawText(self, painter, text):
-        painter.setPen(QColor(0, 0, 0))
-        painter.setFont(QFont('Arial', 20))
+    def drawText(self, painter, text, background_color):
+        # Calculate the inverse color
+        inverse_color = QColor(int((255 - background_color.red())/2), \
+                               int((255 - background_color.green())/2),
+                               int((255 - background_color.blue()/2)))
+        painter.setPen(inverse_color)
+        painter.setFont(QFont('Arial', 18))
         rect = painter.viewport()
         rect.setTop(0)
-        rect.setHeight(50)  # Adjust the height as needed
+        rect.setHeight(65)  # Adjust the height as needed
         painter.drawText(rect, Qt.AlignHCenter | Qt.AlignTop, text)
 
     def create_gaussian_gradient(self, center, radius, background_color_gauss, deviations=1, brightness=255):
@@ -162,7 +193,7 @@ class GaussianDemo(QWidget):
         painter.fillRect(0, 0, 150, 150, photodiode_square) # background small square top-left
         
         # Draw text at the top-middle
-        self.drawText(painter, self.text_message)        
+        self.drawText(painter, self.text_message, self.background_color)  # Pass background_color to drawText    
 
         # Dynamically calculate the center of the window
         center_x = int(self.width() / 2)
@@ -194,11 +225,15 @@ class GaussianDemo(QWidget):
     
         ]
 
-        # Draw Gaussian patterns
-        for position in dynamic_positions:  # "for position in self.positions[:10]" Render the first N positions
-            self.draw_gaussian(painter, position)
-            if self.draw_lines:
-                self.draw_cross_lines(painter, position, self.target_width_pix)
+        # Draw Gaussian patterns if enabled
+        if self.draw_gaussians:
+            for position in dynamic_positions:  # "for position in self.positions[:10]" Render the first N positions
+                if self.draw_shape == 'circle':
+                    self.draw_gaussian(painter, position)
+                else:
+                    self.draw_square(painter, position)
+                if self.draw_lines:
+                    self.draw_cross_lines(painter, position, self.target_width_pix)
 
 
         # Calculate photodiode intensities based on the current background intensity
@@ -225,6 +260,22 @@ class GaussianDemo(QWidget):
 
         painter.end()
 
+    def draw_square(self, painter, position):
+        """Draw a square pattern at the specified position."""
+        painter.save()
+        painter.translate(position)  # Move to the target position
+        painter.rotate(self.orientation)  # Apply rotation to square
+        # Convert dimensions to integers to match QPainter.fillRect requirements
+        square_color = QColor(int(self.luminance_per * 255 / 100), int(self.luminance_per * 255 / 100), int(self.luminance_per * 255 / 100))
+        painter.fillRect(
+            int(-self.target_width_pix / 2),  # Top-left x-coordinate
+            int(-self.target_height_pix / 2),  # Top-left y-coordinate
+            int(self.target_width_pix),  # Width of the rectangle
+            int(self.target_height_pix),  # Height of the rectangle
+            square_color  # Apply Gaussian gradient
+        )
+        painter.restore()
+    
     def draw_gaussian(self, painter, position):
         """Draw a Gaussian pattern at the specified position."""
         painter.save()
@@ -276,19 +327,52 @@ class GaussianDemo(QWidget):
                 QPointF(0, 0), self.target_width_pix / 2, background_color_gauss, deviations=1, brightness=self.luminance_per/100*255
                 )  # Create Gaussian gradient
             self.set_background_color(self.background_color.red())  # Use the red component as the intensity
+            self.update()  # Trigger a repaint
         elif Qt.Key_0 <= event.key() <= Qt.Key_9:
             # Set luminance percentage based on key press (1-9 for 10%-90%, 0 for 100%)
             self.luminance_per = (event.key() - Qt.Key_0) * 10 if event.key() != Qt.Key_0 else 100
-            self.text_message = f"Luminance: {self.luminance_per}%"  # Update text message
+            self.text_message = f"Luminance = {self.luminance_per}%\nDiameter = {self.scale} deg" # Initial text message
             background_color_gauss = QColor(self.background_color.red(), self.background_color.red(), self.background_color.red())
             self.gaussian_gradient = self.create_gaussian_gradient(
                 QPointF(0, 0), self.target_width_pix / 2, background_color_gauss, deviations=1, brightness=self.luminance_per*255/100
             )
             self.update()  # Trigger a repaint
         elif event.key() == Qt.Key_O:
-            # Toggle drawing lines
+            # Toggle drawing diameter lines in each target
             self.draw_lines = not self.draw_lines
             self.update()  # Trigger a repaint
+        elif event.key() == Qt.Key_P:
+            # Toggle drawing Gaussian patterns
+            self.draw_gaussians = not self.draw_gaussians
+            self.update()  # Trigger a repaint
+        elif event.key() == Qt.Key_Up:
+            # Increase the scale
+            background_color_gauss = QColor(self.background_color.red(), self.background_color.red(), self.background_color.red())
+            self.scale = min(self.scale + self.scale_step_deg, self.max_scale_deg)
+            self.target_width_pix = self.converter.deg_to_pixel_rel(self.scale)
+            self.target_height_pix = self.converter.deg_to_pixel_rel(self.scale)
+            self.gaussian_gradient = self.create_gaussian_gradient(
+                QPointF(0, 0), self.target_width_pix / 2, background_color_gauss, deviations=1, brightness=self.luminance_per*255/100
+            )
+            self.text_message = f"Luminance = {self.luminance_per}%\nDiameter = {self.scale} deg" # Initial text message
+            self.update()  # Trigger a repaint
+        elif event.key() == Qt.Key_Down:
+            # Decrease the scale
+            background_color_gauss = QColor(self.background_color.red(), self.background_color.red(), self.background_color.red())
+            self.scale = max(self.scale - self.scale_step_deg, self.min_scale_deg)
+            self.target_width_pix = self.converter.deg_to_pixel_rel(self.scale)
+            self.target_height_pix = self.converter.deg_to_pixel_rel(self.scale)
+            self.gaussian_gradient = self.create_gaussian_gradient(
+                QPointF(0, 0), self.target_width_pix / 2, background_color_gauss, deviations=1, brightness=self.luminance_per*255/100
+            )
+            self.text_message = f"Luminance = {self.luminance_per}%\nDiameter = {self.scale} deg" # Initial text message
+            self.update()  # Trigger a repaint
+        elif event.key() == Qt.Key_I:
+            # Toggle between drawing circles and squares
+            self.draw_shape = 'square' if self.draw_shape == 'circle' else 'circle'
+            self.update()  # Trigger a repaint
+
+        
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
