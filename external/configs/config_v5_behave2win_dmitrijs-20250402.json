@@ -10,7 +10,7 @@
       "weight": 0,
       "tasks": [
         {
-          "task_type": "gaussian_task",
+          "task_type": "delayed_saccade_gaussian_task",
           "type": "task",
           "goal": 1,
           "name": "photic",
@@ -489,7 +489,7 @@
       "weight": 1,
       "tasks": [
         {
-          "task_type": "gaussian_task",
+          "task_type": "delayed_saccade_gaussian_task",
           "type": "task",
           "goal": 1,
           "name": "photic",
@@ -964,7 +964,7 @@
       "weight": 1,
       "tasks": [
         {
-          "task_type": "gaussian_task",
+          "task_type": "delayed_saccade_gaussian_task",
           "type": "task",
           "goal": 1,
           "name": "photic",
