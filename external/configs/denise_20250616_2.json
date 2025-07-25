@@ -134,7 +134,36 @@
           "monitoroper_W_pix": 1920,
           "monitoroper_H_pix": 1200,
           "monitorsubj_model": "LG24GQ50B-B",
-          "monitoroper_model": "DELLU2412M"
+          "monitoroper_model": "DELLU2412M",
+          "task_group": "photic",
+          "target_doesnt_disappear": false,
+          "reward_pertrial_ms": {
+            "min": 10,
+            "max": 350
+          },
+          "reward_start_ml": 500,
+          "reward_rate_mlps": 500.0,
+          "orientation_targ_ran": {
+            "min": 0,
+            "max": 150
+          },
+          "orientation_targ_step": 30,
+          "luminance_targ_per": {
+            "min": 10,
+            "max": 100
+          },
+          "luminance_targ_step": 10,
+          "diameter_target_loc_span_deg": 27,
+          "target_loc_angle_sector1_deg": {
+            "min": 0,
+            "max": 45
+          },
+          "target_loc_angle_sector2_deg": {
+            "min": 45,
+            "max": 90
+          },
+          "target_loc_polar_step_deg": 30,
+          "accpt_gaze_diam_deg": 4
         },
         {
           "task_type": "delayed_saccade",
@@ -474,6 +503,162 @@
           "pulse_count": 1,
           "pulse_frequency": 1,
           "pulse_width": 0
+        },
+        {
+          "task_type": "delayed_saccade_gaussian_task",
+          "type": "task",
+          "goal": 1,
+          "name": "photic",
+          "intertrial_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "start_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "hold_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "blink_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "fail_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "success_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "target_x": {
+            "min": 1,
+            "max": 1
+          },
+          "target_y": {
+            "min": 1,
+            "max": 1
+          },
+          "target_width": {
+            "min": 1,
+            "max": 1
+          },
+          "target_height": {
+            "min": 1,
+            "max": 1
+          },
+          "target_color": [
+            255,
+            255,
+            255
+          ],
+          "targets": [],
+          "width_targ_deg": {
+            "min": 3.0,
+            "max": 3.0
+          },
+          "widthtargdeg_step": 0.1,
+          "height_targ_deg": {
+            "min": 3.0,
+            "max": 3.0
+          },
+          "heighttargdeg_step": 0.1,
+          "is_height_locked": false,
+          "orientation_ran": {
+            "min": 0,
+            "max": 150.0
+          },
+          "orientation_step": 30,
+          "luminence_per": {
+            "min": 30.0,
+            "max": 100
+          },
+          "luminence_step": 10,
+          "accptolerance_deg": 4.0,
+          "subj_dist_m": 0.57,
+          "monitor_width_m": 0.5283,
+          "monitor_width_pix": 1920,
+          "monitor_height_pix": 1080,
+          "fix1_duration": {
+            "min": 400.0,
+            "max": 500.0
+          },
+          "target_present_dur": {
+            "min": 1000.0,
+            "max": 2000.0
+          },
+          "fix2_duration": {
+            "min": 400.0,
+            "max": 500.0
+          },
+          "decision_timeout": {
+            "min": 10000.0,
+            "max": 12000.0
+          },
+          "penalty_delay": {
+            "min": 1000.0,
+            "max": 1000.0
+          },
+          "cum_blinking_ms": 500,
+          "shape": "rectangle",
+          "targethold_duration": {
+            "min": 500.0,
+            "max": 500.0
+          },
+          "background_color": [
+            31,
+            31,
+            31
+          ],
+          "paint_all_targets": false,
+          "luminance_per": {
+            "min": 80.0,
+            "max": 100
+          },
+          "luminance_step": 10,
+          "blink_dur_ms": 5.0,
+          "monitor_W_pix": 1920,
+          "monitor_H_pix": 1080,
+          "monitorsubj_dist_m": 0.57,
+          "monitorsubj_width_m": 0.5283,
+          "monitorsubj_W_pix": 1920,
+          "monitorsubj_H_pix": 1080,
+          "monitorsubj_brightness_perc": 100,
+          "monitoroper_W_pix": 1920,
+          "monitoroper_H_pix": 1200,
+          "monitorsubj_model": "LG24GQ50B-B",
+          "monitoroper_model": "DELLU2412M",
+          "task_group": "photic",
+          "target_doesnt_disappear": true,
+          "reward_pertrial_ms": {
+            "min": 10,
+            "max": 350
+          },
+          "reward_start_ml": 500,
+          "reward_rate_mlps": 500.0,
+          "orientation_targ_ran": {
+            "min": 0,
+            "max": 150
+          },
+          "orientation_targ_step": 30,
+          "luminance_targ_per": {
+            "min": 10,
+            "max": 100
+          },
+          "luminance_targ_step": 10,
+          "diameter_target_loc_span_deg": 5.0,
+          "target_loc_angle_sector1_deg": {
+            "min": 0,
+            "max": 45
+          },
+          "target_loc_angle_sector2_deg": {
+            "min": 45,
+            "max": 90
+          },
+          "target_loc_polar_step_deg": 30,
+          "accpt_gaze_diam_deg": 4
         }
       ]
     },
@@ -613,7 +798,36 @@
           "monitoroper_W_pix": 1920,
           "monitoroper_H_pix": 1200,
           "monitorsubj_model": "LG24GQ50B-B",
-          "monitoroper_model": "DELLU2412M"
+          "monitoroper_model": "DELLU2412M",
+          "task_group": "photic",
+          "target_doesnt_disappear": false,
+          "reward_pertrial_ms": {
+            "min": 10,
+            "max": 350
+          },
+          "reward_start_ml": 500,
+          "reward_rate_mlps": 500.0,
+          "orientation_targ_ran": {
+            "min": 0,
+            "max": 150
+          },
+          "orientation_targ_step": 30,
+          "luminance_targ_per": {
+            "min": 10,
+            "max": 100
+          },
+          "luminance_targ_step": 10,
+          "diameter_target_loc_span_deg": 27,
+          "target_loc_angle_sector1_deg": {
+            "min": 0,
+            "max": 45
+          },
+          "target_loc_angle_sector2_deg": {
+            "min": 45,
+            "max": 90
+          },
+          "target_loc_polar_step_deg": 30,
+          "accpt_gaze_diam_deg": 4
         },
         {
           "task_type": "delayed_saccade",
@@ -1089,6 +1303,35 @@
           "monitoroper_H_pix": 1200,
           "monitorsubj_model": "LG24GQ50B-B",
           "monitoroper_model": "DELLU2412M",
+          "task_group": "photic",
+          "target_doesnt_disappear": false,
+          "reward_pertrial_ms": {
+            "min": 10,
+            "max": 350
+          },
+          "reward_start_ml": 500,
+          "reward_rate_mlps": 500.0,
+          "orientation_targ_ran": {
+            "min": 0,
+            "max": 150
+          },
+          "orientation_targ_step": 30,
+          "luminance_targ_per": {
+            "min": 10,
+            "max": 100
+          },
+          "luminance_targ_step": 10,
+          "diameter_target_loc_span_deg": 27,
+          "target_loc_angle_sector1_deg": {
+            "min": 0,
+            "max": 45
+          },
+          "target_loc_angle_sector2_deg": {
+            "min": 45,
+            "max": 90
+          },
+          "target_loc_polar_step_deg": 30,
+          "accpt_gaze_diam_deg": 4,
           "task_cluster_name": "vcp_training",
           "queue_index": 0
         },
@@ -3453,7 +3696,7 @@
     {
       "name": "nidaq_in",
       "type": "NIDAQ",
-      "Running": true,
+      "Running": false,
       "Sample Rate": 1000.0,
       "Poll Interval": 16,
       "Channel": "Dev1/ai2:6",
@@ -3464,7 +3707,11 @@
         1858,
         1057
       ],
-      "Zero Latency": false
+      "Zero Latency": false,
+      "Terminal Config": "Default",
+      "Channel Type": "Voltage",
+      "Shunt Resistor Location": "Default",
+      "Shunt Resistor Ohms": 1000.0
     },
     {
       "name": "eyetrack",
@@ -3526,7 +3773,8 @@
         355,
         466,
         305
-      ]
+      ],
+      "Camera Values": {}
     },
     {
       "name": "touch screen",
@@ -3705,5 +3953,8 @@
     "selected_node": "nidaq_photodiode",
     "x": "",
     "y": ""
+  },
+  "Persistence": {
+    "Cached": []
   }
 }

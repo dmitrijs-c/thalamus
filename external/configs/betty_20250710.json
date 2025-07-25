@@ -1,0 +1,294 @@
+{
+  "touch_channels": [
+    0,
+    1
+  ],
+  "task_clusters": [
+    {
+      "type": "task_cluster",
+      "name": "Untitled",
+      "weight": 0,
+      "tasks": [
+        {
+          "task_type": "center_fixation_task",
+          "type": "task",
+          "goal": 1,
+          "name": "Untitled",
+          "intertrial_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "start_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "hold_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "blink_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "fail_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "success_timeout": {
+            "min": 1,
+            "max": 1
+          },
+          "target_x": {
+            "min": 1,
+            "max": 1
+          },
+          "target_y": {
+            "min": 1,
+            "max": 1
+          },
+          "target_width": {
+            "min": 1,
+            "max": 1
+          },
+          "target_height": {
+            "min": 1,
+            "max": 1
+          },
+          "target_color": [
+            255,
+            255,
+            255
+          ],
+          "targets": [],
+          "fix_dur_to_get_reward_ms": {
+            "min": 1000,
+            "max": 2000
+          },
+          "penalty_delay": {
+            "min": 3000,
+            "max": 3000
+          },
+          "blink_dur_ms": 500,
+          "reward_pertrial_ms": {
+            "min": 10,
+            "max": 350
+          },
+          "cross_x_pos_deg": 0,
+          "cross_y_pos_deg": 0,
+          "accpt_gaze_radius_deg": 2,
+          "monitorsubj_dist_m": 0.57,
+          "monitorsubj_width_m": 0.5283,
+          "monitorsubj_W_pix": 1920,
+          "monitorsubj_H_pix": 1080,
+          "monitorsubj_brightness_perc": 100,
+          "monitoroper_W_pix": 1920,
+          "monitoroper_H_pix": 1200,
+          "monitorsubj_model": "LG24GQ50B-B",
+          "monitoroper_model": "DELLU2412M",
+          "background_color": [
+            31,
+            31,
+            31
+          ],
+          "shape": "rectangle"
+        }
+      ]
+    }
+  ],
+  "queue": [
+    {
+      "task_type": "center_fixation_task",
+      "type": "task",
+      "goal": 1,
+      "name": "Untitled",
+      "intertrial_timeout": {
+        "min": 1,
+        "max": 1
+      },
+      "start_timeout": {
+        "min": 1,
+        "max": 1
+      },
+      "hold_timeout": {
+        "min": 1,
+        "max": 1
+      },
+      "blink_timeout": {
+        "min": 1,
+        "max": 1
+      },
+      "fail_timeout": {
+        "min": 1,
+        "max": 1
+      },
+      "success_timeout": {
+        "min": 1,
+        "max": 1
+      },
+      "target_x": {
+        "min": 1,
+        "max": 1
+      },
+      "target_y": {
+        "min": 1,
+        "max": 1
+      },
+      "target_width": {
+        "min": 1,
+        "max": 1
+      },
+      "target_height": {
+        "min": 1,
+        "max": 1
+      },
+      "target_color": [
+        255,
+        255,
+        255
+      ],
+      "targets": [],
+      "fix_dur_to_get_reward_ms": {
+        "min": 1000,
+        "max": 2000
+      },
+      "penalty_delay": {
+        "min": 3000,
+        "max": 3000
+      },
+      "blink_dur_ms": 500,
+      "reward_pertrial_ms": {
+        "min": 10,
+        "max": 350
+      },
+      "cross_x_pos_deg": 0,
+      "cross_y_pos_deg": 0,
+      "accpt_gaze_radius_deg": 2,
+      "monitorsubj_dist_m": 0.57,
+      "monitorsubj_width_m": 0.5283,
+      "monitorsubj_W_pix": 1920,
+      "monitorsubj_H_pix": 1080,
+      "monitorsubj_brightness_perc": 100,
+      "monitoroper_W_pix": 1920,
+      "monitoroper_H_pix": 1200,
+      "monitorsubj_model": "LG24GQ50B-B",
+      "monitoroper_model": "DELLU2412M",
+      "background_color": [
+        31,
+        31,
+        31
+      ],
+      "shape": "rectangle",
+      "task_cluster_name": "Untitled",
+      "queue_index": 0
+    }
+  ],
+  "reward_schedule": {
+    "schedules": [
+      [
+        0
+      ]
+    ],
+    "index": 0
+  },
+  "Orchestration": {
+    "Remote Executor": false,
+    "Processes": []
+  },
+  "nodes": [
+    {
+      "name": "cam",
+      "type": "GENICAM",
+      "Running": true,
+      "View": true,
+      "Camera Values": {
+        "WidthMax": 1280,
+        "HeightMax": 1024,
+        "Width": 624,
+        "Height": 458,
+        "OffsetX": 376,
+        "OffsetY": 380,
+        "ExposureTime": 20559.608936309814,
+        "AcquisitionFrameRate": 20.24000358581543,
+        "Gain": 0.0
+      },
+      "Camera": "FLIR_GenTL_v140:21216978",
+      "WidthMax": 1280,
+      "HeightMax": 1024,
+      "Width": 624,
+      "Height": 458,
+      "OffsetX": 376,
+      "OffsetY": 380,
+      "ExposureTime": 20557.641983032227,
+      "AcquisitionFrameRate": 20.24000358581543,
+      "Gain": 0.0,
+      "view_geometry": [
+        1253,
+        60,
+        400,
+        400
+      ]
+    },
+    {
+      "name": "Node 2",
+      "type": "OCULOMATIC",
+      "Threshold": 100,
+      "Min Area": 0,
+      "Max Area": 100,
+      "X Gain": 0.0,
+      "Y Gain": 0.0,
+      "Invert X": true,
+      "Invert Y": true,
+      "Source": "cam",
+      "Computing": true,
+      "Render Thresholded": false,
+      "View": true,
+      "view_geometry": [
+        837,
+        56,
+        400,
+        400
+      ]
+    }
+  ],
+  "Persistence": {
+    "Cached": []
+  },
+  "eye_scaling": {
+    "I": {
+      "x": 1,
+      "y": 1
+    },
+    "II": {
+      "x": 1,
+      "y": 1
+    },
+    "III": {
+      "x": 1,
+      "y": 1
+    },
+    "IV": {
+      "x": 1,
+      "y": 1
+    }
+  },
+  "status": "",
+  "thalamus_view_geometry": [
+    100,
+    100,
+    663,
+    768
+  ],
+  "data_views": [],
+  "node_widgets": [
+    {
+      "node": "Node 2",
+      "dock_area": "right",
+      "view_geometry": [
+        561,
+        22,
+        102,
+        746
+      ]
+    }
+  ]
+}
